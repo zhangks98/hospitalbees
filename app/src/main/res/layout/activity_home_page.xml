@@ -17,7 +17,8 @@
         android:textAlignment="textStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="clickHandler3"/>
 
     <TextView
         android:id="@+id/textView"
@@ -42,7 +43,8 @@
         android:text="Book An Appointment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:onClick="clickHandler4"/>
 
     <Button
         android:id="@+id/button5"
@@ -54,7 +56,8 @@
         android:text="View My Queue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/button6"
+        android:onClick="clickHandler5"/>
 
     <Button
         android:id="@+id/button6"
@@ -66,7 +69,8 @@
         android:text="View Booking History"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/button4"
+        android:onClick="clickHandler6"/>
 
     <Button
         android:id="@+id/button7"
@@ -78,7 +82,8 @@
         android:text="View FAQs"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/button5"
+        android:onClick="clickHandler7"/>
 
     <Button
         android:id="@+id/button8"
@@ -90,5 +95,6 @@
         android:text="Alerts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
+        app:layout_constraintTop_toBottomOf="@+id/button7"
+        android:onClick="clickHandler8"/>
 </android.support.constraint.ConstraintLayout>
