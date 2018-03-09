@@ -5,20 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class BookingDetails extends AppCompatActivity {
+public class FAQ extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_booking_details);
+        setContentView(R.layout.activity_faq);
     }
 
-    public void clickConfirmBooking(View view) {
-        startActivity(new Intent(this, BookingComplete.class));
-
-    }
-
-    public void clickCancelBooking(View view) {
+    public void clickBack3(View view) {
         startActivity(new Intent(this, HomePage.class));
+
     }
 }

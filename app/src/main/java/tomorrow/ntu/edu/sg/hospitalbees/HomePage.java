@@ -13,28 +13,27 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
     }
 
-    public void clickHandler3(View view) {
-        startActivity(new Intent (this, MainActivity.class));
-
-    }
 
     public void clickHandler4(View view) {
-        startActivity(new Intent (this, ChooseClinic.class));
+        startActivity(new Intent(this, ChooseClinic.class));
     }
 
     public void clickHandler5(View view) {
+
     }
 
 
     public void clickHandler6(View view) {
+        startActivity(new Intent(this, BookingHistory.class));
     }
 
 
     public void clickHandler7(View view) {
+        startActivity(new Intent(this, FAQ.class));
     }
 
 
     public void clickHandler8(View view) {
-        startActivity(new Intent (this, Alerts.class));
+        startActivity(new Intent(this, Alerts.class));
     }
 }
