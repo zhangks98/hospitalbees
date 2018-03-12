@@ -7,7 +7,7 @@
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.BookingComplete">
 
     <ImageView
-        android:id="@+id/tick"
+        android:id="@+id/tickImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tick"
+        app:layout_constraintTop_toBottomOf="@id/tickImage"
         android:layout_marginTop="30dp"
-        android:text="Booking Completed"
+        android:text="@string/booking_completed"
         android:textSize="35sp"
         android:textAlignment="center" />
 
@@ -38,21 +38,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bookingCompleted"
         android:layout_marginTop="20dp"
-        android:text="Please go to My Queue and present the QR code to the clinic to check in. Your Q Number will be allocated for you."
+        android:text="@string/completion_notice"
         android:textSize="20sp"
         android:textAlignment="center" />
 
     <Button
-        android:id="@+id/backButton"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/completionNotice"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
-        android:text="Back"
+        android:text="@string/home"
         android:textSize="15dp"
-        android:onClick="clickHandler10" />
+        android:onClick="homeButton" />
 
     <Button
         android:id="@+id/goToMyQueue"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/completionNotice"
         android:layout_marginRight="50dp"
         android:layout_marginTop="20dp"
-        android:text="Go To MyQueue"
+        android:text="@string/go_to_my_queue"
         android:textSize="15dp" />
 
 </android.support.constraint.ConstraintLayout>

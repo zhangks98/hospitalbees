@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void clickHandler(View view) {
+    public void logInButton(View view) {
         String name = editName.getText().toString();
         String password = editPassword.getText().toString();
 
@@ -33,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void clickHandler2(View view) {
+    public void signUpButton(View view) {
     }
 
+    public void forgetPasswordButton(View view) {
+
+    }
 }

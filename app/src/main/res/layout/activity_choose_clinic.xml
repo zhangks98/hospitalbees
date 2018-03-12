@@ -7,16 +7,16 @@
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.ChooseClinic">
 
     <Button
-        android:id="@+id/homepage"
+        android:id="@+id/homepageButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textAlignment="textStart"
-        android:text="Home"
+        android:text="@string/home"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:onClick="clickHandler9" />
+        android:onClick="homePageButton" />
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
@@ -27,44 +27,44 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/homepage"
-        android:onClick="clickHandlerMap" />
+        app:layout_constraintTop_toBottomOf="@id/homepageButton"
+        android:onClick="clickMap" />
 
     <TextView
-        android:id="@+id/traveltime"
+        android:id="@+id/queueTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Estimated Travel Time"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/queuetime"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="20dp" />
-
-    <TextView
-        android:id="@+id/totaltime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Estimated Total Time"
-        android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/traveltime"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="20dp" />
-
-    <TextView
-        android:id="@+id/queuetime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Estimated Queue Time"
+        android:text="@string/estimated_queue_time"
         android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@+id/mapView"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="20dp" />
 
     <TextView
-        android:id="@+id/time1"
+        android:id="@+id/travelTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/estimated_travel_time"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/queueTimeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/totalTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/estimated_total_time"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/travelTimeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/queueTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -75,24 +75,24 @@
         android:layout_marginRight="20dp" />
 
     <TextView
-        android:id="@+id/time2"
+        android:id="@+id/travelTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="30 min"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/time1"
+        app:layout_constraintTop_toBottomOf="@+id/queueTime"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp" />
 
     <TextView
-        android:id="@+id/time3"
+        android:id="@+id/totalTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="50 min"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/time2"
+        app:layout_constraintTop_toBottomOf="@+id/travelTime"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="20dp" />
 

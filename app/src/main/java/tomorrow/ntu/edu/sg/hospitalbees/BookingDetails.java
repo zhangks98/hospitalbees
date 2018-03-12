@@ -13,12 +13,12 @@ public class BookingDetails extends AppCompatActivity {
         setContentView(R.layout.activity_booking_details);
     }
 
-    public void clickConfirmBooking(View view) {
+    public void confirmBookingButton(View view) {
         startActivity(new Intent(this, BookingComplete.class));
 
     }
 
-    public void clickCancelBooking(View view) {
+    public void cancelBookingButton(View view) {
         startActivity(new Intent(this, HomePage.class));
     }
 }

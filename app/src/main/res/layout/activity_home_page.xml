@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Home"
+        android:text="@string/home"
         android:textAlignment="textStart"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,80 +21,80 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/homepageWordings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
-        android:text="I want to ..."
+        android:text="@string/homepage_wordings"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homeText" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/bookAppointmentButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        android:text="Book An Appointment"
+        android:text="@string/book_appointment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="clickHandler4" />
+        app:layout_constraintTop_toBottomOf="@+id/homepageWordings"
+        android:onClick="bookAppointmentButton" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/viewBookingHistoryButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="View My Queue"
+        android:text="@string/view_booking_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6"
-        android:onClick="clickHandler5" />
+        app:layout_constraintTop_toBottomOf="@+id/bookAppointmentButton"
+        android:onClick="viewBookingHistoryButton" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/viewMyQueueButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="View Booking History"
+        android:text="@string/view_my_queue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4"
-        android:onClick="clickHandler6" />
+        app:layout_constraintTop_toBottomOf="@+id/viewBookingHistoryButton"
+        android:onClick="viewMyQueueButton" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/viewfaqButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="View FAQs"
+        android:text="@string/view_faq"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
-        android:onClick="clickHandler7" />
+        app:layout_constraintTop_toBottomOf="@+id/viewMyQueueButton"
+        android:onClick="viewFAQButton" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/viewAlerts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Alerts"
+        android:text="@string/view_alerts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7"
-        android:onClick="clickHandler8" />
+        app:layout_constraintTop_toBottomOf="@+id/viewfaqButton"
+        android:onClick="viewAlertsButton" />
 </android.support.constraint.ConstraintLayout>

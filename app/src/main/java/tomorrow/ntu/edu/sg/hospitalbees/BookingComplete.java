@@ -13,8 +13,8 @@ public class BookingComplete extends AppCompatActivity {
         setContentView(R.layout.activity_booking_complete);
     }
 
-    public void clickHandler10(View view) {
-        startActivity(new Intent(this, BookingDetails.class));
+    public void homeButton(View view) {
+        startActivity(new Intent(this, HomePage.class));
 
     }
 }

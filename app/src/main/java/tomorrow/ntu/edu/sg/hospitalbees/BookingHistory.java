@@ -13,7 +13,7 @@ public class BookingHistory extends AppCompatActivity {
         setContentView(R.layout.activity_booking_history);
     }
 
-    public void clickBack(View view) {
+    public void backButton(View view) {
         startActivity(new Intent(this, HomePage.class));
 
     }

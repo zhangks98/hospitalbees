@@ -14,26 +14,24 @@ public class HomePage extends AppCompatActivity {
     }
 
 
-    public void clickHandler4(View view) {
+    public void bookAppointmentButton(View view) {
         startActivity(new Intent(this, ChooseClinic.class));
     }
 
-    public void clickHandler5(View view) {
-
-    }
-
-
-    public void clickHandler6(View view) {
+    public void viewBookingHistoryButton(View view) {
         startActivity(new Intent(this, BookingHistory.class));
     }
 
+    public void viewMyQueueButton(View view) {
 
-    public void clickHandler7(View view) {
+    }
+
+    public void viewFAQButton(View view) {
         startActivity(new Intent(this, FAQ.class));
     }
 
 
-    public void clickHandler8(View view) {
+    public void viewAlertsButton(View view) {
         startActivity(new Intent(this, Alerts.class));
     }
 }

@@ -7,136 +7,136 @@
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.BookingDetails">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/bookingDetailsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="Your Booking Details"
+        android:text="@string/booking_details_text"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/bookingDetailsWordings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="One Last Step..."
+        android:text="@string/booking_details_wordings"
         android:textSize="40sp"
-        app:layout_constraintTop_toBottomOf="@id/textView4"
+        app:layout_constraintTop_toBottomOf="@id/bookingDetailsText"
         android:layout_marginTop="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/name_text"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/textView5"
+        app:layout_constraintTop_toBottomOf="@id/bookingDetailsWordings"
         android:layout_marginTop="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/editUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Name"
         android:textSize="20sp"
         android:layout_marginRight="30dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView5"
+        app:layout_constraintTop_toBottomOf="@id/bookingDetailsWordings"
         android:layout_marginTop="30dp" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/clinic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Clinic"
+        android:text="@string/clinic"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        app:layout_constraintTop_toBottomOf="@id/textView6" />
+        app:layout_constraintTop_toBottomOf="@id/userName" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/clinicName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Some Clinic"
         android:textSize="20sp"
         android:layout_marginRight="30dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView7" />
+        app:layout_constraintTop_toBottomOf="@id/editUserName" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/bookingTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Time of Booking"
+        android:text="@string/booking_time"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        app:layout_constraintTop_toBottomOf="@id/textView8" />
+        app:layout_constraintTop_toBottomOf="@id/clinic" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/bookingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="15-02-2018"
+        android:text="14:27"
         android:textSize="20sp"
         android:layout_marginRight="30dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView9" />
+        app:layout_constraintTop_toBottomOf="@id/clinicName" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/estimatedWaitingTimeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Est. Waiting Time"
+        android:text="@string/estimated_waiting_time"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        app:layout_constraintTop_toBottomOf="@id/textView10" />
+        app:layout_constraintTop_toBottomOf="@id/bookingTime" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/estimatedWaitingTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="50 min"
         android:textSize="20sp"
         android:layout_marginRight="30dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView11" />
+        app:layout_constraintTop_toBottomOf="@id/bookingTime" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/confirmBookingButton"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
-        android:text="Confirm Booking"
+        android:text="@string/confirm_booking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        android:onClick="clickConfirmBooking" />
+        app:layout_constraintTop_toBottomOf="@+id/estimatedWaitingTimeText"
+        android:onClick="confirmBookingButton" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/cancelBookingButton"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Cancel Booking"
+        android:text="@string/cancel_booking"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button12"
-        android:onClick="clickCancelBooking" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmBookingButton"
+        android:onClick="cancelBookingButton" />
 
 
 </android.support.constraint.ConstraintLayout>

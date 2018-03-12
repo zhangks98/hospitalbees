@@ -13,8 +13,12 @@ public class Alerts extends AppCompatActivity {
         setContentView(R.layout.activity_alerts);
     }
 
-    public void clickBack2(View view) {
+    public void thanksButton(View view) {
         startActivity(new Intent(this, HomePage.class));
 
+    }
+
+    public void backButton(View view) {
+        startActivity(new Intent(this, HomePage.class));
     }
 }

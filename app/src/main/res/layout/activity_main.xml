@@ -14,11 +14,11 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Username"
+        android:hint="@string/prompt_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editGroupname" />
+        app:layout_constraintTop_toBottomOf="@+id/editGroupName" />
 
     <EditText
         android:id="@+id/editPassword"
@@ -29,13 +29,13 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:hint="Password"
+        android:hint="@string/prompt_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editName" />
 
     <TextView
-        android:id="@+id/editGroupname"
+        android:id="@+id/editGroupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -43,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:paddingTop="80dp"
         android:paddingBottom="80dp"
-        android:text="HospitalBees"
+        android:text="@string/app_name"
         android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,11 +56,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Log In"
+        android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword"
-        android:onClick="clickHandler" />
+        android:onClick="logInButton" />
 
     <Button
         android:id="@+id/button2"
@@ -69,11 +69,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        android:onClick="clickHandler2" />
+        android:onClick="signUpButton" />
 
     <TextView
         android:id="@+id/forgetPassword"
@@ -83,9 +83,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Forget Your Password?"
+        android:text="@string/forget_password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        android:onClick="forgetPasswordButton"/>
 </android.support.constraint.ConstraintLayout>

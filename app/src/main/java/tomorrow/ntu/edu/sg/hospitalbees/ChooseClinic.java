@@ -13,12 +13,12 @@ public class ChooseClinic extends AppCompatActivity {
         setContentView(R.layout.activity_choose_clinic);
     }
 
-    public void clickHandler9(View view) {
+    public void homePageButton(View view) {
 
         startActivity(new Intent(this, HomePage.class));
     }
 
-    public void clickHandlerMap(View view) {
+    public void clickMap(View view) {
         startActivity(new Intent(this, BookingDetails.class));
     }
 }
