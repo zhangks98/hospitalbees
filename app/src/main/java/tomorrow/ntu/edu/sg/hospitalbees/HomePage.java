@@ -23,6 +23,7 @@ public class HomePage extends AppCompatActivity {
     }
 
     public void viewMyQueueButton(View view) {
+        startActivity(new Intent(this, MyQueue.class));
 
     }
 

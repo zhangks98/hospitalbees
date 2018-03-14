@@ -5,20 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class BookingComplete extends AppCompatActivity {
+public class MyQueue extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_booking_complete);
+        setContentView(R.layout.activity_my_queue);
     }
 
-    public void homeButton(View view) {
+    public void backButton(View view) {
         startActivity(new Intent(this, HomePage.class));
 
     }
 
-    public void MyQueue(View view) {
-        startActivity(new Intent(this, MyQueue.class));
+    public void detailedButton(View view) {
+        startActivity(new Intent(this, MyQueueDetailed.class));
     }
 }

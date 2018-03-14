@@ -43,6 +43,24 @@
     <string name="thanks_button">Thanks</string>
     <string name="know_more">Know more ...</string>
 
+    <string name="searching_text">Search...</string>
+    <string name="search_text">Search</string>
+    <string name="quickselect_text">Quick Select</string>
+    <string name="fever_text">Fever</string>
+    <string name="cough_text">Cough</string>
+    <string name="diarrhoea_text">Diarrhoea</string>
+    <string name="headache_text">Headache</string>
+    <string name="sorethroat_text">Sore Throat</string>
+
+    <string name="my_queue_text">My Queue</string>
+    <string name="queue_text">Check-in to View Your \'Q\' Number</string>
+    <string name="reminder_text">Please Scan the QR Code at the Clinic Counter</string>
+    <string name="queuenumber_text">Your \'Q\' Number</string>
+    <string name="waitingtime_text">EST. Waiting Time</string>
+    <string name="reminder1_text">Numbers may not be called in order</string>
+    <string name="timing_text">20 min</string>
+    <string name="queuenumber1_text">1024</string>
+
 
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
@@ -55,7 +73,7 @@
     </string>
     <string name="title_activity_homepage">Homepage</string>
     <string name="title_activity_choose_clinic">Map</string>
-    <string name="title_activity_faq">FAQ</string>
+    <string name="title_activity_faq">FAQs</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
