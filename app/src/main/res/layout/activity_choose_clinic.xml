@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tomorrow.ntu.edu.sg.hospitalbees.ChooseClinic">
+
+    <Button
+        android:id="@+id/homepageButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textAlignment="textStart"
+        android:text="@string/home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="homePageButton" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/homepageButton"
+        android:onClick="clickMap" />
+
+    <TextView
+        android:id="@+id/queueTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/estimated_queue_time"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/travelTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/estimated_travel_time"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/queueTimeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/totalTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/estimated_total_time"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/travelTimeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/queueTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="20 min"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/travelTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="30 min"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/queueTime"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/totalTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="50 min"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/travelTime"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="20dp" />
+
+</android.support.constraint.ConstraintLayout>
