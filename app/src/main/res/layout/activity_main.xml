@@ -88,5 +88,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        android:onClick="forgetPasswordButton"/>
+        android:onClick="forgetPasswordButton" />
 </android.support.constraint.ConstraintLayout>

@@ -8,18 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 public class BookingHistory extends AppCompatActivity {
-    RecyclerView recyclerView;
-    String[] Items = {"Item1", "Item2", "Item2", "Item2", "Item2", "Item2", "Item2", "Item2", "Item2"};
+    RecyclerView recentMonthRV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_history);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new Adapter(this, Items));
+        recentMonthRV = (RecyclerView) findViewById(R.id.recyclerview);
+        recentMonthRV.setLayoutManager(new LinearLayoutManager(this));
+        recentMonthRV.setAdapter(new Adapter(this));
     }
 
 
+    public void backButton(View view) {
+        startActivity(new Intent(this, HomePage.class));
+    }
 }

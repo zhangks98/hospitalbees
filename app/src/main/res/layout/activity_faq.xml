@@ -28,8 +28,7 @@
         app:layout_constraintLeft_toRightOf="@id/backButton"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginStart="70dp"
-        />
+        android:layout_marginStart="70dp" />
 
 
     <EditText
@@ -86,7 +85,8 @@
         android:layout_marginLeft="40dp"
         android:layout_marginStart="40dp"
 
-        android:onClick="feverButton"/>
+
+        />
 
     <Button
         android:id="@+id/cough"
@@ -99,7 +99,8 @@
         android:layout_marginRight="40dp"
         android:layout_marginEnd="40dp"
 
-        android:onClick="coughButton"/>
+
+        />
 
     <Button
         android:id="@+id/diarrhoea"
@@ -111,7 +112,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginStart="40dp"
-        android:onClick="diarrhoeaButton"/>
+
+        />
 
     <Button
         android:id="@+id/headache"
@@ -124,7 +126,8 @@
         android:layout_marginRight="40dp"
         android:layout_marginEnd="40dp"
 
-        android:onClick="headacheButton"/>
+
+        />
 
     <Button
         android:id="@+id/sorethroat"
@@ -136,6 +139,20 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="40dp"
         android:layout_marginStart="40dp"
-        android:onClick="sorethroatButton"/>
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/faq_recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        >
+
+
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

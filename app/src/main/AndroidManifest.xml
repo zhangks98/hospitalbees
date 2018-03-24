@@ -50,7 +50,7 @@
         <activity android:name=".BookingHistory" />
         <activity android:name=".FAQ" />
         <activity android:name=".MyQueue" />
-        <activity android:name=".MyQueueDetailed"></activity>
+        <activity android:name=".MyQueueDetailed" />
     </application>
 
 </manifest>
