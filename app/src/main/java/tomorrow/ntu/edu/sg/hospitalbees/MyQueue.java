@@ -21,6 +21,8 @@ public class MyQueue extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_queue);
 
+        boolean set = false;
+
         queueNumberText = (TextView) findViewById(R.id.QueueNumberText);
         queueNumber1Text = (TextView) findViewById(R.id.queuenumber1Text);
         waitingTimeText = (TextView) findViewById(R.id.WaitingTimeText);
