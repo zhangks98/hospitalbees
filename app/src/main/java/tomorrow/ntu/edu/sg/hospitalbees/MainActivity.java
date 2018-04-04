@@ -11,7 +11,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     EditText editName, editPassword;
-
+    String admin[] = {"Gerald", "Qinan", "Fuhank", "Kaishuo", "Vansh"};
+    String pass[] = {"pass1", "pass2", "pass3", "pass4", "pass5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +22,24 @@ public class MainActivity extends AppCompatActivity {
         editPassword = (EditText) findViewById(R.id.editPassword);
 
 
+
+
     }
 
     public void logInButton(View view) {
         String name = editName.getText().toString();
         String password = editPassword.getText().toString();
+        int i;
+        for (i = 0; i< admin.length; i++) {
+            if (name.equals(admin[i])) {
+                if (password.equals(pass[i]))
+                    startActivity(new Intent(MainActivity.this, HomePage.class));
+            }
+        }
+
 
         Log.i(TAG, "clickHandler: name~" + name + ", password~" + password);
-        startActivity(new Intent(MainActivity.this, HomePage.class));
+
 
     }
 

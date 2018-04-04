@@ -11,6 +11,7 @@
 
     <!-- Strings related to homepage -->
     <string name="home">Home</string>
+    <string name="logout">Log Out</string>
     <string name="homepage_wordings">I want to ...</string>
     <string name="book_appointment">Book An Appointment</string>
     <string name="view_booking_history">View Booking History</string>
