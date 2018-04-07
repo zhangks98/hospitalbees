@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +32,14 @@ public class MainActivity extends AppCompatActivity {
         String password = editPassword.getText().toString();
         int i;
         for (i = 0; i< admin.length; i++) {
-            if (name.equals(admin[i])) {
-                if (password.equals(pass[i]))
-                    startActivity(new Intent(MainActivity.this, HomePage.class));
+            if ((name.equals(admin[i])) && (password.equals(pass[i]))) {
+                startActivity(new Intent(MainActivity.this, HomePage.class));
+                break;
             }
+        }
+        if (i == admin.length) {
+            Toast.makeText(getApplicationContext(), "WRONG CREDENTIALS", Toast.LENGTH_LONG).show();
+
         }
 
 
