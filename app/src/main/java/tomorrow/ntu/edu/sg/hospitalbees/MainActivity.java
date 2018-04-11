@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         for (i = 0; i< admin.length; i++) {
             if ((name.equals(admin[i])) && (password.equals(pass[i]))) {
                 startActivity(new Intent(MainActivity.this, HomePage.class));
+//                this.finish();
                 break;
             }
         }
