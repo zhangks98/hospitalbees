@@ -11,19 +11,10 @@
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.BookingHistory"
     tools:showIn="@layout/activity_booking_history">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back_text"
-        android:onClick="backButton"
-        />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/booking_history_text"
-        android:layout_toRightOf="@id/backButton"
         android:textSize="30sp"
         android:paddingLeft="16dp"
         />

@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.FAQ">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/back_text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp"
-        android:onClick="backButton" />
 
     <TextView
         android:id="@+id/FAQName"
@@ -25,9 +14,9 @@
         android:text="@string/title_activity_faq"
         android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/backButton"
+        app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="70dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginStart="70dp" />
 
 
@@ -38,7 +27,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/searching_text"
-        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/FAQName"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
@@ -51,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_text"
-        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintTop_toBottomOf="@id/FAQName"
         app:layout_constraintLeft_toRightOf="@id/searchBar"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"

@@ -65,6 +65,7 @@ public class ChooseClinic extends AppCompatActivity implements OnMapReadyCallbac
     private void initMap() {
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFragment);
         mapFragment.getMapAsync(this);
+
 //        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 //        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //            return;
@@ -88,16 +89,23 @@ public class ChooseClinic extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        goToLocation(1.3340363,103.7429231, 12);
+        goToLocation(1.343250, 103.715230, 12);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mGoogleMap.setMyLocationEnabled(true);
+        }
+
+
     }
 
     private void goToLocation(double lat, double lng, float zoom) {
+        LatLng clinicsview = new LatLng(lat,lng);
         for (int i = 0; i<clinics.length ; i++) {
             LatLng clinic = new LatLng(lats[i], lngs[i]);
             mGoogleMap.addMarker(new MarkerOptions().position(clinic).title(clinics[i]));
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(clinic, zoom);
             mGoogleMap.moveCamera(update);
         }
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(clinicsview, zoom));
     }
 
     public void confirmBookingButton(View view) {
