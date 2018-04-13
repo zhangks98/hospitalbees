@@ -69,6 +69,13 @@
                 android:value=".HomePage" />
         </activity>
         <activity
+            android:name=".ClinicList"
+            android:parentActivityName=".HomePage">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomePage" />
+        </activity>
+        <activity
             android:name=".ChooseClinic"
             android:parentActivityName=".HomePage">
             <meta-data
@@ -97,6 +104,7 @@
                 android:value=".HomePage" />
         </activity>
 
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -112,7 +120,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ClinicList"></activity>
+
     </application>
 
 </manifest>
