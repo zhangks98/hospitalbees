@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tomorrow.ntu.edu.sg.hospitalbees.MyQueue">
+
+
+    <TextView
+        android:id="@+id/MyQueueName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_queue_text"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+         />
+
+    <TextView
+        android:id="@+id/QueueText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/queue_text"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/MyQueueName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingTop="40dp" />
+
+    <ImageView
+        android:id="@+id/QRImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/QueueText"
+        app:srcCompat="@drawable/qrcode"/>
+
+    <TextView
+        android:id="@+id/ReminderText"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/reminder_text"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/QRImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingBottom="40dp" />
+
+
+    <TextView
+        android:id="@+id/QueueNumberText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/queuenumber_text"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/MyQueueName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingTop="30dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/queuenumber1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:text="@string/queuenumber1_text"
+        android:textAlignment="center"
+        android:textSize="80sp"
+        app:layout_constraintTop_toBottomOf="@id/QueueNumberText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/WaitingTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/waitingtime_text"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/queuenumber1Text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"
+
+        />
+
+    <TextView
+        android:id="@+id/Timingtext"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="70dp"
+        android:text="@string/timing_text"
+        android:textSize="50sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/WaitingTimeText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingTop="20dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/Reminder1Text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/reminder1_text"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/Timingtext"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="10dp"
+        android:visibility="gone"/>
+
+</android.support.constraint.ConstraintLayout>

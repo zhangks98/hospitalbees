@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tomorrow.ntu.edu.sg.hospitalbees.FAQ">
+
+
+    <TextView
+        android:id="@+id/FAQName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_activity_faq"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="70dp" />
+
+
+    <EditText
+        android:id="@+id/searchBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/searching_text"
+        app:layout_constraintTop_toBottomOf="@id/FAQName"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+
+        />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_text"
+        app:layout_constraintTop_toBottomOf="@id/FAQName"
+        app:layout_constraintLeft_toRightOf="@id/searchBar"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+
+        android:onClick="searchButton"
+
+        />
+
+    <TextView
+        android:id="@+id/quickSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quickselect_text"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <Button
+        android:id="@+id/fever"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/fever_text"
+        app:layout_constraintTop_toBottomOf="@id/quickSelect"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+
+
+        />
+
+    <Button
+        android:id="@+id/cough"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/cough_text"
+        app:layout_constraintTop_toBottomOf="@id/quickSelect"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+
+
+        />
+
+    <Button
+        android:id="@+id/diarrhoea"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/diarrhoea_text"
+        app:layout_constraintTop_toBottomOf="@id/fever"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+
+        />
+
+    <Button
+        android:id="@+id/headache"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/headache_text"
+        app:layout_constraintTop_toBottomOf="@id/cough"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+
+
+        />
+
+    <Button
+        android:id="@+id/sorethroat"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sorethroat_text"
+        app:layout_constraintTop_toBottomOf="@id/diarrhoea"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:id="@+id/faq_recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        >
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+</android.support.constraint.ConstraintLayout>
