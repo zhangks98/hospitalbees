@@ -86,6 +86,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         editor.putBoolean(logincheck, false);
         editor.apply();
         startActivity(new Intent(this, LoginActivity.class));
+        this.finish();
 
 
     }
