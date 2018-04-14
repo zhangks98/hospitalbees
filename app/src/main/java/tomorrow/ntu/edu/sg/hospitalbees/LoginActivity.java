@@ -2,6 +2,7 @@ package tomorrow.ntu.edu.sg.hospitalbees;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private static final String TAG = "LoginActivity";
+    public static String logindetails = "LoginDetails";
     SharedPreferences check;
 
     EditText editName, editPassword;
@@ -48,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = check.edit();
                 editor.putBoolean(logincheck, true);
                 editor.apply();
+                PreferenceManager.getDefaultSharedPreferences(this).edit().putString(logindetails, name).apply();
                 startActivity(new Intent(this, HomePage.class));
                 this.finish();
                 break;
