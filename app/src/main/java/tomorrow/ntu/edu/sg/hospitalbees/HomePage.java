@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import static tomorrow.ntu.edu.sg.hospitalbees.MyQueue.shareddata;
+import static tomorrow.ntu.edu.sg.hospitalbees.SplashActivity.logincheck;
 
 public class HomePage extends AppCompatActivity implements View.OnClickListener {
 
     TextView homePageWording;
     CardView homePageCard;
-    SharedPreferences set;
+    SharedPreferences set, check;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,10 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
         set = getSharedPreferences(shareddata, 0);
         boolean returned = set.getBoolean(shareddata, false);
+        check = getSharedPreferences(logincheck, 0);
+        boolean checked = check.getBoolean(logincheck, false);
+
+
 
         homePageWording = (TextView) findViewById(R.id.homepageWordings);
         homePageCard = (CardView) findViewById(R.id.homepage_card_view);
@@ -75,6 +81,12 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         startActivity(new Intent(this, Alerts.class));
     }
 
-    public void logOutButton(View view) { startActivity(new Intent(this, MainActivity.class));
+    public void logOutButton(View view) {
+        SharedPreferences.Editor editor = check.edit();
+        editor.putBoolean(logincheck, false);
+        editor.apply();
+        startActivity(new Intent(this, LoginActivity.class));
+
+
     }
 }

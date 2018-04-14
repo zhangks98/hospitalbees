@@ -67,12 +67,6 @@ public class MyQueue extends AppCompatActivity implements View.OnClickListener {
             reminder1Text.setVisibility(View.GONE);
         }
     }
-    public void backButton(View view) {
-
-
-        startActivity(new Intent(this, HomePage.class));
-
-    }
 
     @Override
     public void onClick(View v) {
