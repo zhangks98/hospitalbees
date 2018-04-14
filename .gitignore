@@ -40,3 +40,6 @@ _sandbox
 
 # Android Studio captures folder
 captures/
+
+# API Keys
+google-services.json
