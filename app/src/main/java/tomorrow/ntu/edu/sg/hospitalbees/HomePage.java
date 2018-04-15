@@ -9,6 +9,18 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
 public class HomePage extends AppCompatActivity implements View.OnClickListener {
 
     private TextView homePageWording;
@@ -24,6 +36,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
         this.mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
         this.mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
 
 //        set = getSharedPreferences(shareddata, 0);
 //        boolean returned = set.getBoolean(shareddata, false);

@@ -18,7 +18,4 @@ public class Alerts extends AppCompatActivity {
 
     }
 
-    public void backButton(View view) {
-        startActivity(new Intent(this, HomePage.class));
-    }
 }

@@ -19,10 +19,11 @@
     <string name="view_alerts">Alerts</string>
 
     <!-- Strings related to chooseClinic -->
-    <string name="estimated_queue_time">Estimated Queue Time</string>
-    <string name="estimated_travel_time">Estimated Travel Time</string>
-    <string name="estimated_total_time">Estimated Total Time</string>
+    <string name="queue_length">Queue Length</string>
+    <string name="travel_time">Travel Time</string>
+    <string name="total_time">Total Time</string>
     <string name="next">Next</string>
+    <string name="minutes">Min</string>
 
 
     <string name="booking_completed">Booking Completed</string>
@@ -199,7 +200,7 @@
     <string name="pref_booking_miss_time_key" translatable="false">missTime</string>
 
 
-
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 
 
