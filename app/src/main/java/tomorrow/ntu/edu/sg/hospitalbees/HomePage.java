@@ -1,5 +1,6 @@
 package tomorrow.ntu.edu.sg.hospitalbees;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +9,12 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
 
-import static tomorrow.ntu.edu.sg.hospitalbees.MyQueue.shareddata;
-import static tomorrow.ntu.edu.sg.hospitalbees.SplashActivity.logincheck;
-
 public class HomePage extends AppCompatActivity implements View.OnClickListener {
 
-    TextView homePageWording;
-    CardView homePageCard;
-    SharedPreferences set, check;
+    private TextView homePageWording;
+    private CardView homePageCard;
+    private SharedPreferences mUserPreferences;
+    private SharedPreferences mBookingPreferences;
 
 
     @Override
@@ -23,25 +22,20 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        set = getSharedPreferences(shareddata, 0);
-        boolean returned = set.getBoolean(shareddata, false);
-        check = getSharedPreferences(logincheck, 0);
-        boolean checked = check.getBoolean(logincheck, false);
+        this.mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
+        this.mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
 
-
+//        set = getSharedPreferences(shareddata, 0);
+//        boolean returned = set.getBoolean(shareddata, false);
 
         homePageWording = (TextView) findViewById(R.id.homepageWordings);
-        homePageCard = (CardView) findViewById(R.id.homepage_card_view);
-
-        homePageCard.setOnClickListener(this);
-
-        if (returned) {
-            homePageWording.setVisibility(View.GONE);
-            homePageCard.setVisibility(View.VISIBLE);
-        }
-
-
-
+//        homePageCard = (CardView) findViewById(R.id.homepage_card_view);
+//        homePageCard.setOnClickListener(this);
+//
+//        if (returned) {
+//            homePageWording.setVisibility(View.GONE);
+//            homePageCard.setVisibility(View.VISIBLE);
+//        }
     }
 
     @Override
@@ -50,10 +44,9 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
             homePageWording.setVisibility(View.VISIBLE);
             homePageCard.setVisibility(View.GONE);
 
-            SharedPreferences.Editor editor = set.edit();
-            editor.putBoolean(shareddata, false);
-            editor.apply();
-
+//            SharedPreferences.Editor editor = set.edit();
+//            editor.putBoolean(shareddata, false);
+//            editor.apply();
 
         }
     }
@@ -82,12 +75,11 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     }
 
     public void logOutButton(View view) {
-        SharedPreferences.Editor editor = check.edit();
-        editor.putBoolean(logincheck, false);
-        editor.apply();
+        SharedPreferences.Editor editor = mUserPreferences.edit();
+        editor.putBoolean(getString(R.string.pref_user_is_logged_in_key), false).apply();
+        mBookingPreferences.edit().clear().apply();
         startActivity(new Intent(this, LoginActivity.class));
         this.finish();
-
 
     }
 }
