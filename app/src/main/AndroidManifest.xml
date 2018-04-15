@@ -70,13 +70,6 @@
                 android:value=".HomePage" />
         </activity>
         <activity
-            android:name=".ClinicList"
-            android:parentActivityName=".HomePage">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
-        </activity>
-        <activity
             android:name=".ChooseClinic"
             android:parentActivityName=".HomePage">
             <meta-data

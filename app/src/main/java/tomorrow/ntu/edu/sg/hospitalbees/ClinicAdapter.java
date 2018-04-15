@@ -60,12 +60,15 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         ((ClinicAdapter.Item)holder).clinicname.setText(clinics[position]);
+        ((ClinicAdapter.Item)holder).clinictraveltime.setText("50min");
+        ((ClinicAdapter.Item)holder).clinicqueuelength.setText("2person");
+        ((ClinicAdapter.Item)holder).clinictotaltime.setText("100min");
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 PreferenceManager.getDefaultSharedPreferences(context).edit().putString(clinicdetails, clinics[position]).apply();
 
-                Intent intent = new Intent(context, ChooseClinic.class);
+                Intent intent = new Intent(context, BookingDetails.class);
                 context.startActivity(intent);
             }
         });
@@ -79,10 +82,16 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
     public class Item extends RecyclerViewHolder {
 
         TextView clinicname;
+        TextView clinictraveltime;
+        TextView clinicqueuelength;
+        TextView clinictotaltime;
 
         public Item(View itemView) {
             super(itemView);
             clinicname = (TextView) itemView.findViewById(R.id.clinic_title);
+            clinictraveltime = (TextView) itemView.findViewById(R.id.clinic_travel_edit);
+            clinicqueuelength = (TextView) itemView.findViewById(R.id.clinic_queue_edit);
+            clinictotaltime = (TextView) itemView.findViewById(R.id.clinic_total_edit);
 
         }
     }
