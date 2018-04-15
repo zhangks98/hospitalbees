@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.clinicdetails;
+import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.queuetime;
 
 //import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.clinicdetails;
 //import static tomorrow.ntu.edu.sg.hospitalbees.LoginActivity.logindetails;
@@ -38,6 +39,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     String loginNameString;
     String clinicChoiceString;
     String timeString;
+    String waitString;
     private SharedPreferences mUserPreferences;
 
     static final int REQUEST_LOCATION = 1;
@@ -76,6 +78,9 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
         timeString = format.format(calendar.getTime());
         TextView time = (TextView) findViewById(R.id.bookingTime);
         time.setText(timeString);
+        waitString = PreferenceManager.getDefaultSharedPreferences(this).getString(queuetime, "QueueNotFound");
+        TextView wait = (TextView) findViewById(R.id.estimatedWaitingTime);
+        wait.setText(waitString + " minutes");
 
     }
     void getLocation(){

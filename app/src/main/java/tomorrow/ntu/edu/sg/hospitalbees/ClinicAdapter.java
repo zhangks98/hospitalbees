@@ -37,7 +37,11 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
 
     Context context;
     String clinics[] = {"Ng Teng Fong Hospital", "Fullerton Health"};
+    String traveltime[] = {"41", "12"};
+    String queuelength[] = {"5", "2"};
+
     public static String clinicdetails = "ClinicChoice";
+    public static String queuetime = "QueueTime";
 
 
 
@@ -56,17 +60,26 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         return clinicitem;
     }
 
+    public String getTotalTime(String traveltime, String queuelength) {
+        int traveltimeint = Integer.parseInt(traveltime);
+        int queuelengthint = Integer.parseInt(queuelength);
+        int totaltimeint = traveltimeint + (queuelengthint * 7);
+        String totaltime = Integer.toString(totaltimeint);
+        return totaltime;
+    }
+
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         ((ClinicAdapter.Item)holder).clinicname.setText(clinics[position]);
-        ((ClinicAdapter.Item)holder).clinictraveltime.setText("50min");
-        ((ClinicAdapter.Item)holder).clinicqueuelength.setText("2person");
-        ((ClinicAdapter.Item)holder).clinictotaltime.setText("100min");
+        ((ClinicAdapter.Item)holder).clinictraveltime.setText(traveltime[position] + " minutes");
+        ((ClinicAdapter.Item)holder).clinicqueuelength.setText(queuelength[position] + " person");
+        ((ClinicAdapter.Item)holder).clinictotaltime.setText(getTotalTime(traveltime[position], queuelength[position]) + " minutes");
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
                 PreferenceManager.getDefaultSharedPreferences(context).edit().putString(clinicdetails, clinics[position]).apply();
+                PreferenceManager.getDefaultSharedPreferences(context).edit().putString(queuetime, Integer.toString(Integer.parseInt(queuelength[position]) * 7)).apply();
 
                 Intent intent = new Intent(context, BookingDetails.class);
                 context.startActivity(intent);
