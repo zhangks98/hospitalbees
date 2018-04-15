@@ -68,6 +68,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomePage" />
+            <intent-filter>
+                <action android:name="MYQUEUE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".ChooseClinic"
@@ -113,7 +117,21 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="tomorrow.ntu.edu.sg.hospitalbees.notification_icon"
+            android:resource="@drawable/androiddisplay" />
+        <meta-data
+            android:name="tomorrow.ntu.edu.sg.hospitalbees.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="tomorrow.ntu.edu.sg.hospitalbees.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
 
+        <service android:name="tomorrow.ntu.edu.sg.hospitalbees.utilities.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
     </application>
 

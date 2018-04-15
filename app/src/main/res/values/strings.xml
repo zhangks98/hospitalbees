@@ -200,7 +200,7 @@
     <string name="pref_booking_miss_time_key" translatable="false">missTime</string>
 
 
-
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 
 
