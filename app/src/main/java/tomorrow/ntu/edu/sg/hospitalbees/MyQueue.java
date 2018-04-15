@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
@@ -19,21 +21,34 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Calendar;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.utilities.TIDParser;
 
 public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener{
 
     private TextView queueNumberLabelText, queueNumberValueText, lengthBeforeLabelText, lengthBeforeValueText, queueBottomReminderText, qrTopReminderText, qrBottomReminderText;
     private ImageView mQRCodeImage;
+    private ProgressBar mLoadingInicator;
     private FloatingActionButton mCreateBookingFAB;
     private SharedPreferences mUserPreferences;
     private SharedPreferences mBookingPreferences;
     private com.google.zxing.Writer mQRCodeWriter;
 
+    private OkHttpClient mHttpClient;
+
     private final String TAG = this.getClass().getSimpleName();
     private final int MISS_TIME_ALLOWED_IN_MINUTES = 5;
+    private final String serverUrl = BuildConfig.SERVER_URL;
 
     // TODO cache QR code BitMap
 
@@ -50,6 +65,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         qrTopReminderText = (TextView) findViewById(R.id.tv_qr_top_reminder);
         qrBottomReminderText = (TextView) findViewById(R.id.tv_qr_bottom_reminder);
         mQRCodeImage = (ImageView) findViewById(R.id.QRImage);
+        mLoadingInicator = findViewById(R.id.pb_load_queue_view);
         mCreateBookingFAB = findViewById(R.id.fab_create_booking);
         mCreateBookingFAB.setOnClickListener(this);
 
@@ -58,7 +74,14 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         mBookingPreferences.registerOnSharedPreferenceChangeListener(this);
 
         mQRCodeWriter = new QRCodeWriter();
+        mHttpClient = new OkHttpClient();
+
+/*        SharedPreferences.Editor editor = mBookingPreferences.edit();
+        editor.putString(getString(R.string.pref_booking_tid_key), "00012018-04-15T14:28:07Z0002");
+        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_inactive_value));
+        editor.commit();*/
         updateQueueActivity();
+        updateBookingStatus();
     }
 
     @Override
@@ -68,6 +91,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     }
 
     protected void updateQueueActivity() {
+        showLoadingIndicator();
         String bookingStatus = mBookingPreferences.getString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_completed_value));
         String tid = mBookingPreferences.getString(getString(R.string.pref_booking_tid_key), null);
 
@@ -97,6 +121,46 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
             Log.e(TAG, "error fetching tid");
         }
 
+    }
+
+    private void updateBookingStatus() {
+        if (mBookingPreferences != null) {
+            String tid = mBookingPreferences.getString(getString(R.string.pref_booking_tid_key), null);
+            if (tid != null) {
+                Uri queryUri = Uri.parse(serverUrl).buildUpon().appendPath("api").appendPath("booking").appendPath(tid).build();
+                Request request = new Request.Builder().url(queryUri.toString()).get().build();
+                mHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if(response.isSuccessful()) {
+                            final String body = response.body().string();
+                            try {
+                                JSONObject obj = new JSONObject(body);
+                                final String bookingStatus = obj.getString("Booking_BookingStatus");
+                                final String queueStatus = obj.getString("Booking_QueueStatus");
+                                if (bookingStatus.equals(getString(R.string.pref_booking_status_absent_value)) ||
+                                        bookingStatus.equals(getString(R.string.pref_booking_status_completed_value))) {
+                                    mBookingPreferences.edit().putString(getString(R.string.pref_booking_status_key), bookingStatus).apply();
+                                } else if (!queueStatus.equals("FINISHED") && !queueStatus.equals("MISSED")) {
+                                    mBookingPreferences.edit().putString(getString(R.string.pref_booking_status_key), queueStatus).apply();
+                                } else if (queueStatus.equals(getString(R.string.pref_booking_status_missed_value))) {
+                                    // TODO do multiple http request
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                    }
+                });
+            }
+        }
     }
 
     private Bitmap generateQRCode(String value) {
@@ -133,6 +197,8 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         lengthBeforeValueText.setVisibility(View.GONE);
         queueBottomReminderText.setVisibility(View.GONE);
         mCreateBookingFAB.setVisibility(View.GONE);
+        mLoadingInicator.setVisibility(View.GONE);
+
     }
 
     private void showQueueNumber() {
@@ -145,6 +211,8 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         lengthBeforeValueText.setVisibility(View.VISIBLE);
         queueBottomReminderText.setVisibility(View.VISIBLE);
         mCreateBookingFAB.setVisibility(View.GONE);
+        mLoadingInicator.setVisibility(View.GONE);
+
     }
 
     private void showNoPendingBooking() {
@@ -157,6 +225,20 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         lengthBeforeLabelText.setVisibility(View.GONE);
         lengthBeforeValueText.setVisibility(View.GONE);
         queueBottomReminderText.setVisibility(View.GONE);
+        mLoadingInicator.setVisibility(View.GONE);
+    }
+
+    private void showLoadingIndicator() {
+        qrTopReminderText.setVisibility(View.GONE);
+        mQRCodeImage.setVisibility(View.GONE);
+        mCreateBookingFAB.setVisibility(View.GONE);
+        qrBottomReminderText.setVisibility(View.GONE);
+        queueNumberLabelText.setVisibility(View.GONE);
+        queueNumberValueText.setVisibility(View.GONE);
+        lengthBeforeLabelText.setVisibility(View.GONE);
+        lengthBeforeValueText.setVisibility(View.GONE);
+        queueBottomReminderText.setVisibility(View.GONE);
+        mLoadingInicator.setVisibility(View.VISIBLE);
     }
 
     private void setQueueNumber(String tid) {

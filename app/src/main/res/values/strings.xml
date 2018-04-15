@@ -187,12 +187,12 @@
     <string name="pref_user_phone_number_key" translatable="false">phoneNumber</string>
 
     <string name="pref_booking_status_key" translatable="false">bookingStatus</string>
-    <string name="pref_booking_status_inactive_value" translatable="false">inactive</string>
-    <string name="pref_booking_status_active_value" translatable="false">active</string>
-    <string name="pref_booking_status_missed_value" translatable="false">missed</string>
-    <string name="pref_booking_status_reactivated_value" translatable="false">reactivated</string>
-    <string name="pref_booking_status_completed_value" translatable="false">completed</string>
-    <string name="pref_booking_status_absent_value" translatable="false">absent</string>
+    <string name="pref_booking_status_inactive_value" translatable="false">INACTIVE</string>
+    <string name="pref_booking_status_active_value" translatable="false">ACTIVE</string>
+    <string name="pref_booking_status_missed_value" translatable="false">MISSED</string>
+    <string name="pref_booking_status_reactivated_value" translatable="false">REACTIVATED</string>
+    <string name="pref_booking_status_completed_value" translatable="false">COMPLETED</string>
+    <string name="pref_booking_status_absent_value" translatable="false">ABSENT</string>
 
     <string name="pref_booking_tid_key" translatable="false">tid</string>
     <string name="pref_booking_length_before_key" translatable="false">lengthBefore</string>
