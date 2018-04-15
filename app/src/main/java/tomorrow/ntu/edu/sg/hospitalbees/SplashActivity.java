@@ -1,5 +1,6 @@
 package tomorrow.ntu.edu.sg.hospitalbees;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -7,25 +8,17 @@ import android.os.Bundle;
 
 public class SplashActivity extends AppCompatActivity {
 
-    public static String logincheck = "LogInCheck";
-    SharedPreferences check;
-    Intent intent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        check = getSharedPreferences(logincheck, 0);
-        boolean checked = check.getBoolean(logincheck, false);
-
-        if (checked) {
-            intent = new Intent(this, HomePage.class);
-            startActivity(intent);
+        SharedPreferences user = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
+        if (user.getBoolean(getString(R.string.pref_user_is_logged_in_key), getResources().getBoolean(R.bool.pref_is_logged_in_default))) {
+            startActivity(new Intent(this, HomePage.class));
         }
         else {
-            intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, LoginActivity.class));
         }
         this.finish();
     }

@@ -54,14 +54,22 @@
     <string name="headache_text">Headache</string>
     <string name="sorethroat_text">Sore Throat</string>
 
-    <string name="my_queue_text">My Queue</string>
-    <string name="queue_text">Check-in to View Your \'Q\' Number</string>
-    <string name="reminder_text">Please Scan the QR Code at the Clinic Counter</string>
+    <!--View My Queue related-->
+    <string name="qr_top_reminder_text_inactive">Check-in to View Your \'Q\' Number</string>
+    <string name="qr_bottom_reminder_text_inactive">Please Scan the QR Code at the Clinic Counter</string>
+    <string name="qr_top_reminder_text_miss">You Have Missed your \'Q\'</string>
+    <string name="qr_bottom_reminder_text_miss">Please Scan the QR Code at the Clinic Counter before &lt;b>%tR&lt;/b> to Reactivate</string>
+    <string name="qr_top_reminder_text_absent">Your Current Booking is Absent</string>
+    <string name="qr_top_reminder_text_completed">Your Have No Pending Booking :)</string>
+    <string name="qr_bottom_reminder_text_no_pending">Press Me to Create a New Booking</string>
+
+
+
     <string name="queuenumber_text">Your \'Q\' Number</string>
-    <string name="waitingtime_text">EST. Waiting Time</string>
-    <string name="reminder1_text">Numbers may not be called in order</string>
-    <string name="timing_text">20 min</string>
-    <string name="queuenumber1_text">1024</string>
+    <string name="queue_length_before_text">Patients In Front of You</string>
+    <string name="queue_length_before_unavailable_text">Unavailable</string>
+    <string name="queue_reminder_text_active">Numbers may not be called in order</string>
+    <string name="queue_reminder_text_reactivated">Numbers may not be called in order\nNote: Your Booking can be Reactivated only once</string>
 
 
     <string name="action_sign_in">Sign in or register</string>
@@ -170,4 +178,30 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    
+    <!--String related to SharedPreferences-->
+    <string name="pref_user" translatable="false">user</string>
+    <string name="pref_booking" translatable="false">booking</string>
+
+    <string name="pref_user_is_logged_in_key" translatable="false">isLoggedIn</string>
+    <string name="pref_user_phone_number_key" translatable="false">phoneNumber</string>
+
+    <string name="pref_booking_status_key" translatable="false">bookingStatus</string>
+    <string name="pref_booking_status_inactive_value" translatable="false">inactive</string>
+    <string name="pref_booking_status_active_value" translatable="false">active</string>
+    <string name="pref_booking_status_missed_value" translatable="false">missed</string>
+    <string name="pref_booking_status_reactivated_value" translatable="false">reactivated</string>
+    <string name="pref_booking_status_completed_value" translatable="false">completed</string>
+    <string name="pref_booking_status_absent_value" translatable="false">absent</string>
+
+    <string name="pref_booking_tid_key" translatable="false">tid</string>
+    <string name="pref_booking_length_before_key" translatable="false">lengthBefore</string>
+    <string name="pref_booking_miss_time_key" translatable="false">missTime</string>
+
+
+
+
+
+
+
 </resources>
