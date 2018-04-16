@@ -102,7 +102,6 @@
                 android:value=".HomePage" />
         </activity>
 
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -127,6 +126,8 @@
             android:name="tomorrow.ntu.edu.sg.hospitalbees.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
+        <activity android:name=".LocationDuration"></activity>
+        
         <service android:name="tomorrow.ntu.edu.sg.hospitalbees.utilities.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

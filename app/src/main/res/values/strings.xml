@@ -65,7 +65,7 @@
     <string name="qr_top_reminder_text_absent">Your Current Booking is Absent</string>
     <string name="qr_top_reminder_text_completed">Your Have No Pending Booking :)</string>
     <string name="qr_bottom_reminder_text_no_pending">Press Me to Create a New Booking</string>
-
+    
     <string name="queuenumber_text">Your \'Q\' Number</string>
     <string name="queue_length_before_text">Patients In Front of You</string>
     <string name="queue_length_before_unavailable_text">Unavailable</string>
@@ -181,7 +181,7 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    
+
     <!--String related to SharedPreferences-->
     <string name="pref_user" translatable="false">user</string>
     <string name="pref_booking" translatable="false">booking</string>
@@ -202,6 +202,8 @@
     <string name="pref_booking_missed_time_key" translatable="false">missedTime</string>
     <string name="pref_booking_miss_time_allowed_key" translatable="false">missTimeAllowed</string>
 
+    <string name="pref_clinic_name" translatable="false">clinicName</string>
+    <string name="pref_clinic_location" translatable="false">clinicLocation</string>
 
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
