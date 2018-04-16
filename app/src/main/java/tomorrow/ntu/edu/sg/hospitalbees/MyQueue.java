@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Calendar;
 
 import okhttp3.Call;
@@ -47,7 +48,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private OkHttpClient mHttpClient;
 
     private final String TAG = this.getClass().getSimpleName();
-    private final int MISS_TIME_ALLOWED_IN_MINUTES = 5;
+    private final int DEFAULT_MISS_TIME_ALLOWED = 5;
     private final String serverUrl = BuildConfig.SERVER_URL;
 
     // TODO cache QR code BitMap
@@ -71,15 +72,18 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
 
         mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
         mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = mBookingPreferences.edit();
+//        editor.putString(getString(R.string.pref_booking_tid_key), "00012018-04-16T08:35:45Z0012");
+        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_absent_value));
+        editor.commit();
+
         mBookingPreferences.registerOnSharedPreferenceChangeListener(this);
 
         mQRCodeWriter = new QRCodeWriter();
         mHttpClient = new OkHttpClient();
 
-/*        SharedPreferences.Editor editor = mBookingPreferences.edit();
-        editor.putString(getString(R.string.pref_booking_tid_key), "00012018-04-15T14:28:07Z0002");
-        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_inactive_value));
-        editor.commit();*/
+
         updateQueueActivity();
         updateBookingStatus();
     }
@@ -101,28 +105,34 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
             } else if (bookingStatus.equals(getString(R.string.pref_booking_status_active_value))) {
                 setActive(tid);
             } else if (bookingStatus.equals(getString(R.string.pref_booking_status_missed_value))) {
-                long missTime = mBookingPreferences.getLong(getString(R.string.pref_booking_miss_time_key), -1);
+                long missTime = mBookingPreferences.getLong(getString(R.string.pref_booking_missed_time_key), -1);
+                int missTimeAllowed = mBookingPreferences.getInt(getString(R.string.pref_booking_miss_time_allowed_key),
+                        getResources().getInteger(R.integer.pref_booking_default_miss_time_allowed));
                 if (missTime > 0) {
                     Calendar missTimeCal = Calendar.getInstance();
                     missTimeCal.setTimeInMillis(missTime);
-                    missTimeCal.add(Calendar.MINUTE, MISS_TIME_ALLOWED_IN_MINUTES);
+                    missTimeCal.add(Calendar.MINUTE, missTimeAllowed);
                     setMissed(tid,missTimeCal);
                 } else {
                     Log.e(TAG, "error fetching miss time");
                 }
-            } else if (bookingStatus.equals(getString(R.string.pref_booking_status_active_value))) {
+            } else if (bookingStatus.equals(getString(R.string.pref_booking_status_reactivated_value))) {
                 setReactivated(tid);
             }
-        } else if (bookingStatus.equals(getString(R.string.pref_booking_status_completed_value))) {
+        }
+        if (bookingStatus.equals(getString(R.string.pref_booking_status_completed_value))) {
             setCompleted();
         } else if (bookingStatus.equals(getString(R.string.pref_booking_status_absent_value))) {
             setAbsent();
-        } else {
-            Log.e(TAG, "error fetching tid");
+        } else if (tid == null){
+            mBookingPreferences.edit().clear().apply();
+            setCompleted();
+            Log.d(TAG, "receive no tid");
         }
 
     }
 
+    // TODO refactor to a service
     private void updateBookingStatus() {
         if (mBookingPreferences != null) {
             String tid = mBookingPreferences.getString(getString(R.string.pref_booking_tid_key), null);
@@ -137,6 +147,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+                        SharedPreferences.Editor bookingPrefEditor = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE).edit();
                         if(response.isSuccessful()) {
                             final String body = response.body().string();
                             try {
@@ -145,18 +156,36 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
                                 final String queueStatus = obj.getString("Booking_QueueStatus");
                                 if (bookingStatus.equals(getString(R.string.pref_booking_status_absent_value)) ||
                                         bookingStatus.equals(getString(R.string.pref_booking_status_completed_value))) {
-                                    mBookingPreferences.edit().putString(getString(R.string.pref_booking_status_key), bookingStatus).apply();
-                                } else if (!queueStatus.equals("FINISHED") && !queueStatus.equals("MISSED")) {
-                                    mBookingPreferences.edit().putString(getString(R.string.pref_booking_status_key), queueStatus).apply();
+                                    bookingPrefEditor.clear();
+                                    bookingPrefEditor.putString(getString(R.string.pref_booking_status_key), bookingStatus).apply();
+                                } else if (queueStatus.equals(getString(R.string.pref_booking_status_inactive_value))) {
+                                    bookingPrefEditor.putString(getString(R.string.pref_booking_status_key), queueStatus).apply();
+                                } else if (queueStatus.equals(getString(R.string.pref_booking_status_active_value)) ||
+                                        queueStatus.equals(getString(R.string.pref_booking_status_reactivated_value))){
+                                    if (!obj.isNull("lengthBefore")) {
+                                        final int lengthBefore = obj.getInt("lengthBefore");
+                                        bookingPrefEditor.putInt(getString(R.string.pref_booking_length_before_key), lengthBefore).commit();
+                                    } else {
+                                        bookingPrefEditor.putInt(getString(R.string.pref_booking_length_before_key), -2).commit();
+                                    }
+                                    bookingPrefEditor.putString(getString(R.string.pref_booking_status_key), queueStatus).apply();
                                 } else if (queueStatus.equals(getString(R.string.pref_booking_status_missed_value))) {
-                                    // TODO do multiple http request
+                                    final long missedTime = obj.getLong("missedTime");
+                                    final int missTimeAllowed = obj.getInt("missTimeAllowed");
+                                    bookingPrefEditor.putLong(getString(R.string.pref_booking_missed_time_key), missedTime);
+                                    bookingPrefEditor.putInt(getString(R.string.pref_booking_miss_time_allowed_key), missTimeAllowed);
+                                    bookingPrefEditor.commit();
+                                    bookingPrefEditor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_missed_value));
+                                    bookingPrefEditor.apply();
                                 }
                             } catch (JSONException e) {
+                                Log.e(TAG,"JSON parsing error");
                                 e.printStackTrace();
                             }
+                        } else if (response.code() == HttpURLConnection.HTTP_GONE) {
+                            // If query booking returns gone, it means a missed booking is already absent
+                            bookingPrefEditor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_absent_value)).apply();
                         }
-
-
                     }
                 });
             }
@@ -207,7 +236,6 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         qrBottomReminderText.setVisibility(View.GONE);
         queueNumberLabelText.setVisibility(View.VISIBLE);
         queueNumberValueText.setVisibility(View.VISIBLE);
-        lengthBeforeLabelText.setVisibility(View.VISIBLE);
         lengthBeforeValueText.setVisibility(View.VISIBLE);
         queueBottomReminderText.setVisibility(View.VISIBLE);
         mCreateBookingFAB.setVisibility(View.GONE);
@@ -244,11 +272,20 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private void setQueueNumber(String tid) {
         String queueNumber = TIDParser.getQueueNumber(tid);
         queueNumberValueText.setText(queueNumber);
-        int queueLengthBefore = mBookingPreferences.getInt((getString(R.string.pref_booking_length_before_key)), -1);
-        if (queueLengthBefore >= 0) {
+        int queueLengthBefore = mBookingPreferences.getInt((getString(R.string.pref_booking_length_before_key)), -2);
+        if (queueLengthBefore > 0) {
             lengthBeforeValueText.setText(String.valueOf(queueLengthBefore));
+            lengthBeforeLabelText.setVisibility(View.VISIBLE);
+        } else if (queueLengthBefore == -1) {
+            lengthBeforeValueText.setText(getString(R.string.queue_length_before_notified_text));
+            lengthBeforeLabelText.setVisibility(View.INVISIBLE);
+        } else if (queueLengthBefore == 0) {
+            lengthBeforeValueText.setText(getString(R.string.queue_length_before_approaching_text));
+            lengthBeforeLabelText.setVisibility(View.INVISIBLE);
         } else {
             lengthBeforeValueText.setText(getString(R.string.queue_length_before_unavailable_text));
+            lengthBeforeLabelText.setVisibility(View.VISIBLE);
+
         }
     }
 

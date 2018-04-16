@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="pref_booking_default_miss_time_allowed">30</integer>
+</resources>
