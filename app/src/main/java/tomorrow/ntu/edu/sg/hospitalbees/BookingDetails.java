@@ -30,6 +30,7 @@ import java.util.Calendar;
 
 import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.clinicdetails;
 import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.queuetime;
+import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.traveldetails;
 
 //import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.clinicdetails;
 //import static tomorrow.ntu.edu.sg.hospitalbees.LoginActivity.logindetails;
@@ -47,7 +48,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     LocationManager lm;
 
 
-    String clinics[] = {"Ng Teng Fong Hospital", "Fullerton Health"};
+    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health"};
     double lats[] = {1.3340363, 1.344278};
     double lngs[] = {103.7429231, 103.6815601};
     double latti;

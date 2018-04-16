@@ -5,17 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import static tomorrow.ntu.edu.sg.hospitalbees.LocationDuration.travellist;
 
-class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+
 
     private ItemClickListener itemClickListener;
     public RecyclerViewHolder(View itemView) {
@@ -30,18 +30,22 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClick
     public void onClick(View v) {
         itemClickListener.onClick(v,getAdapterPosition());
     }
+
 }
 
 
-public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
+public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     Context context;
-    String clinics[] = {"Ng Teng Fong Hospital", "Fullerton Health"};
-    String traveltime[] = {"41", "12"};
+    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health"};
+    String traveltime[];
     String queuelength[] = {"5", "2"};
+    String currentlocation = "NTU Hall 9";
 
     public static String clinicdetails = "ClinicChoice";
     public static String queuetime = "QueueTime";
+    public static String traveldetails = "TravelDetails";
+
 
 
 
@@ -60,6 +64,10 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         return clinicitem;
     }
 
+
+
+
+
     public String getTotalTime(String traveltime, String queuelength) {
         int traveltimeint = Integer.parseInt(traveltime);
         int queuelengthint = Integer.parseInt(queuelength);
@@ -67,6 +75,10 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         String totaltime = Integer.toString(totaltimeint);
         return totaltime;
     }
+    public String getQueuetime(String queuelength) {
+        return Integer.toString(Integer.parseInt(queuelength) * 7);
+    }
+
 
 
     @Override
@@ -78,8 +90,9 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position) {
+                PreferenceManager.getDefaultSharedPreferences(context).edit().putString(traveldetails, traveltime[position]).apply();
                 PreferenceManager.getDefaultSharedPreferences(context).edit().putString(clinicdetails, clinics[position]).apply();
-                PreferenceManager.getDefaultSharedPreferences(context).edit().putString(queuetime, Integer.toString(Integer.parseInt(queuelength[position]) * 7)).apply();
+                PreferenceManager.getDefaultSharedPreferences(context).edit().putString(queuetime, getQueuetime(queuelength[position])).apply();
 
                 Intent intent = new Intent(context, BookingDetails.class);
                 context.startActivity(intent);
@@ -87,8 +100,11 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
         });
     }
 
+
     @Override
     public int getItemCount()  {
+        String temp = PreferenceManager.getDefaultSharedPreferences(context).getString(travellist, "QueueNotFound");
+        traveltime = temp.split(",");
         return clinics.length;
     }
 
