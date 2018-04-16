@@ -56,6 +56,8 @@
     <string name="sorethroat_text">Sore Throat</string>
 
     <!--View My Queue related-->
+    <string name="refresh_menu_label">Refresh</string>
+
     <string name="qr_top_reminder_text_inactive">Check-in to View Your \'Q\' Number</string>
     <string name="qr_bottom_reminder_text_inactive">Please Scan the QR Code at the Clinic Counter</string>
     <string name="qr_top_reminder_text_miss">You Have Missed your \'Q\'</string>
@@ -63,8 +65,6 @@
     <string name="qr_top_reminder_text_absent">Your Current Booking is Absent</string>
     <string name="qr_top_reminder_text_completed">Your Have No Pending Booking :)</string>
     <string name="qr_bottom_reminder_text_no_pending">Press Me to Create a New Booking</string>
-
-
 
     <string name="queuenumber_text">Your \'Q\' Number</string>
     <string name="queue_length_before_text">Patients In Front of You</string>

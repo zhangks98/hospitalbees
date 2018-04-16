@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -48,7 +50,6 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private OkHttpClient mHttpClient;
 
     private final String TAG = this.getClass().getSimpleName();
-    private final int DEFAULT_MISS_TIME_ALLOWED = 5;
     private final String serverUrl = BuildConfig.SERVER_URL;
 
     // TODO cache QR code BitMap
@@ -73,16 +74,15 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
         mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editor = mBookingPreferences.edit();
+//        SharedPreferences.Editor editor = mBookingPreferences.edit();
 //        editor.putString(getString(R.string.pref_booking_tid_key), "00012018-04-16T08:35:45Z0012");
-        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_absent_value));
-        editor.commit();
+//        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_absent_value));
+//        editor.commit();
 
         mBookingPreferences.registerOnSharedPreferenceChangeListener(this);
 
         mQRCodeWriter = new QRCodeWriter();
         mHttpClient = new OkHttpClient();
-
 
         updateQueueActivity();
         updateBookingStatus();
@@ -92,6 +92,21 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     protected void onDestroy() {
         super.onDestroy();
         mBookingPreferences.unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_myqueue, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_refresh) {
+            updateBookingStatus();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     protected void updateQueueActivity() {
