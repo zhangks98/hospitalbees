@@ -288,6 +288,10 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private void setQueueNumber(String tid) {
         String queueNumber = TIDParser.getQueueNumber(tid);
         queueNumberValueText.setText(queueNumber);
+        setLengthBefore();
+    }
+
+    private void setLengthBefore() {
         int queueLengthBefore = mBookingPreferences.getInt((getString(R.string.pref_booking_length_before_key)), -2);
         if (queueLengthBefore > 0) {
             lengthBeforeValueText.setText(String.valueOf(queueLengthBefore));
@@ -301,7 +305,6 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         } else {
             lengthBeforeValueText.setText(getString(R.string.queue_length_before_unavailable_text));
             lengthBeforeLabelText.setVisibility(View.VISIBLE);
-
         }
     }
 
@@ -349,8 +352,9 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.pref_booking_status_key))) {
             updateQueueActivity();
+        } else if (key.equals(R.string.pref_booking_length_before_key)) {
+            setLengthBefore();
         }
-
     }
 
     @Override

@@ -134,8 +134,6 @@
             android:name="tomorrow.ntu.edu.sg.hospitalbees.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <activity android:name=".LocationDuration"></activity>
-        
         <service android:name="tomorrow.ntu.edu.sg.hospitalbees.utilities.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

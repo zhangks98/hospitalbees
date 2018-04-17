@@ -21,10 +21,24 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
+import tomorrow.ntu.edu.sg.hospitalbees.HBApp;
+
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
+
+    @Inject
+    OkHttpClient mHttpClient;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ((HBApp) getApplication()).getNetComponent().inject(this);
+    }
 
     /**
      * Called if InstanceID token is updated. This may occur if the security of
