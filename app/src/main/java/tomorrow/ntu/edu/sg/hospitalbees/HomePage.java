@@ -66,7 +66,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
 
 
     public void bookAppointmentButton(View view) {
-        startActivity(new Intent(this, LocationDuration.class));
+        startActivity(new Intent(this, ChooseClinic.class));
     }
 
     public void viewBookingHistoryButton(View view) {

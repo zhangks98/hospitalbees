@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import tomorrow.ntu.edu.sg.hospitalbees.adaptors.BookingHistoryAdapter;
+
 public class BookingHistory extends AppCompatActivity {
     RecyclerView recentMonthRV;
 
@@ -17,7 +19,7 @@ public class BookingHistory extends AppCompatActivity {
 
         recentMonthRV = (RecyclerView) findViewById(R.id.recyclerview);
         recentMonthRV.setLayoutManager(new LinearLayoutManager(this));
-        recentMonthRV.setAdapter(new Adapter(this));
+        recentMonthRV.setAdapter(new BookingHistoryAdapter(this));
     }
 
 

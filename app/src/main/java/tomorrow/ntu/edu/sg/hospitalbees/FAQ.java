@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import tomorrow.ntu.edu.sg.hospitalbees.adaptors.FaqAdapter;
+
 public class FAQ extends AppCompatActivity implements View.OnClickListener{
 
     RecyclerView faqRV;

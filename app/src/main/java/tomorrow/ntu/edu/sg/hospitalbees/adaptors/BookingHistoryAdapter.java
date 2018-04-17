@@ -1,4 +1,4 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.adaptors;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,14 +11,16 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import tomorrow.ntu.edu.sg.hospitalbees.R;
+
+public class BookingHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     Context context;
     String[] Items = {"NUH", "NUH", "NUH", "Ng Teng Fong Hospital", "Jurong Polyclinic", "SGH", "NUH", "NUH", "Ng Teng Fong Hospital", "Jurong Polyclinic", "SGH", "SGH"};
     String[] Date = {"31082018", "24072018", "21062018", "20052018", "17042018", "15032018", "13022018", "10012018", "08122017", "05112017", "03102017", "31082017"};
 
 
 
-    public Adapter(Context context){
+    public BookingHistoryAdapter(Context context){
         this.context = context;
     }
 
