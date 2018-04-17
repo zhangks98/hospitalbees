@@ -77,16 +77,9 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
 
         mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
         mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = mBookingPreferences.edit();
-        editor.putString(getString(R.string.pref_booking_tid_key), "00012018-04-16T17:03:27Z0013");
-        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_completed_value));
-        editor.commit();
-
         mBookingPreferences.registerOnSharedPreferenceChangeListener(this);
 
         mQRCodeWriter = new QRCodeWriter();
-
         updateQueueActivity();
         updateBookingStatus();
     }
@@ -165,7 +158,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
                     @Override
                     public void onFailure(Call call, IOException e) {
                         Log.e(TAG, "failed to update booking status");
-                        e.printStackTrace();
+                        Log.e(TAG, e.getMessage());
                     }
 
                     @Override
@@ -203,7 +196,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
                                 }
                             } catch (JSONException e) {
                                 Log.e(TAG,"JSON parsing error");
-                                e.printStackTrace();
+                                Log.e(TAG, e.getMessage());
                             }
                         } else if (response.code() == HttpURLConnection.HTTP_GONE) {
                             // If query booking returns gone, it means a missed booking is already absent

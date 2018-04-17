@@ -14,8 +14,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     private EditText editName, editPassword;
-    String user[] = {"Gerald", "Qinan", "Fuhank", "Kaishuo", "Vansh"};
-    String pass[] = {"pass1", "pass2", "pass3", "pass4", "pass5"};
+    String user[] = {"90908080", "42576543", "77766689"};
+    String pass[] = {"pass1", "pass2", "pass3"};
 
 
 

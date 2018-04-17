@@ -8,6 +8,7 @@ import dagger.Component;
 @Component(modules = {NetModule.class})
 public interface NetComponent {
     void inject(ChooseClinic activity);
+    void inject(BookingDetails activity);
     void inject(MyQueue activity);
     void inject(Alerts activity);
 }

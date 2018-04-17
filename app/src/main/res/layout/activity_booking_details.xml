@@ -1,141 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.BookingDetails">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layout_booking_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/bookingDetailsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/booking_details_text"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <fragment
-        android:id="@+id/mapFrag"
-        android:name="com.google.android.gms.maps.MapFragment"
-        android:layout_width="350dp"
-        android:layout_height="250dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bookingDetailsText"
-        />
+        <fragment
+            android:id="@+id/mapFrag"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="350dp"
+            android:layout_height="250dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/name_text"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/mapFrag"
-        android:layout_marginTop="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="30dp" />
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_text"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/mapFrag"
+            android:layout_marginTop="24dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="30dp" />
 
-    <TextView
-        android:id="@+id/editUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapFrag"
-        android:layout_marginTop="30dp" />
+        <TextView
+            android:id="@+id/tv_user_phone_number_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mapFrag"
+            android:layout_marginTop="24dp" />
 
-    <TextView
-        android:id="@+id/clinic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/clinic"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintTop_toBottomOf="@id/userName" />
+        <TextView
+            android:id="@+id/clinic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clinic"
+            android:textSize="20sp"
+            android:paddingTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintTop_toBottomOf="@id/userName" />
 
-    <TextView
-        android:id="@+id/clinicName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editUserName" />
+        <TextView
+            android:id="@+id/tv_chosen_clinic_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginRight="30dp"
+            android:paddingTop="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_phone_number_value" />
 
-    <TextView
-        android:id="@+id/bookingTimeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/booking_time"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintTop_toBottomOf="@id/clinic" />
+        <TextView
+            android:id="@+id/bookingTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/booking_time"
+            android:textSize="20sp"
+            android:paddingTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintTop_toBottomOf="@id/clinic" />
 
-    <TextView
-        android:id="@+id/bookingTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="14:27"
-        android:textSize="20sp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/clinicName" />
+        <TextView
+            android:id="@+id/tv_booking_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:paddingTop="8dp"
+            android:layout_marginRight="30dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_chosen_clinic_name" />
 
-    <TextView
-        android:id="@+id/estimatedWaitingTimeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/estimated_waiting_time"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintTop_toBottomOf="@id/bookingTime" />
+        <TextView
+            android:id="@+id/estimatedWaitingTimeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eta_label"
+            android:textSize="20sp"
+            android:paddingTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_booking_time" />
 
-    <TextView
-        android:id="@+id/estimatedWaitingTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="50 min"
-        android:textSize="20sp"
-        android:layout_marginRight="30dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bookingTime" />
+        <TextView
+            android:id="@+id/tv_chosen_clinic_eta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_marginRight="30dp"
+            android:paddingTop="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_booking_time" />
 
-    <Button
-        android:id="@+id/confirmBookingButton"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/confirm_booking"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/estimatedWaitingTimeText"
-        android:onClick="confirmBookingButton" />
+        <Button
+            android:id="@+id/confirmBookingButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="@string/confirm_booking"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimatedWaitingTimeText"
+            android:onClick="confirmBookingButton" />
 
-    <Button
-        android:id="@+id/cancelBookingButton"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/cancel_booking"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/estimatedWaitingTimeText"
-        android:onClick="cancelBookingButton" />
+        <Button
+            android:id="@+id/cancelBookingButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            style="@style/Widget.AppCompat.Button"
+            android:text="@string/cancel_booking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/estimatedWaitingTimeText"
+            android:onClick="cancelBookingButton" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_booking_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:visibility="visible"
+            />
+
+        <TextView
+            android:id="@+id/tv_booking_details_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:text=""/>
+
+    </LinearLayout>
+
+</FrameLayout>

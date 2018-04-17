@@ -11,18 +11,10 @@
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.BookingHistory"
     tools:showIn="@layout/activity_booking_history">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/booking_history_text"
-        android:textSize="30sp"
-        android:paddingLeft="16dp"
-        />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:foregroundGravity="center_horizontal"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

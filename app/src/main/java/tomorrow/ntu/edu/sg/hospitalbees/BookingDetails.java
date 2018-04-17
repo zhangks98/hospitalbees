@@ -2,17 +2,23 @@ package tomorrow.ntu.edu.sg.hospitalbees;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.preference.PreferenceManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -21,72 +27,107 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.w3c.dom.Text;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Date;
+
+import javax.inject.Inject;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
 
 public class BookingDetails extends AppCompatActivity implements OnMapReadyCallback {
 
-    String loginNameString;
-    String clinicChoiceString;
-    String timeString;
-    String waitString;
-    private SharedPreferences mUserPreferences;
+    private static final int REQUEST_LOCATION = 1;
+    private static final String TAG = "BookingDetails";
+    private static final String serverUrl = BuildConfig.SERVER_URL;
 
-    static final int REQUEST_LOCATION = 1;
     GoogleMap mGoogleMap;
     LocationManager lm;
 
+    private SharedPreferences mUserPreferences, mBookingPreferences;
+    private Hospital mChosenHospital;
 
-    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health"};
-    double lats[] = {1.3340363, 1.344278};
-    double lngs[] = {103.7429231, 103.6815601};
-    double latti;
-    double longi;
-    LatLng clinic;
-    int i;
+    private ConstraintLayout mBookingDetailsLayout;
+    private LinearLayout mBookingMessageLayout;
+    private TextView mUserPhoneNumberTextView, mHospitalNameTextView, mBookingTimeTextView, mETATextView, mBookingMessageTextView;
 
+    private String mUserPhoneNumber;
+    private double myLat, myLong;
 
+    @Inject
+    OkHttpClient mHttpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_details);
+        ((HBApp) getApplication()).getNetComponent().inject(this);
 
-        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        getLocation();
-        initMap();
-
+        // Get user preferences for user info
         mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
-        loginNameString = mUserPreferences.getString(getString(R.string.pref_user_phone_number_key), null);
-        TextView username = (TextView) findViewById(R.id.editUserName);
-        username.setText(loginNameString);
-//        clinicChoiceString = PreferenceManager.getDefaultSharedPreferences(this).getString(clinicdetails, "ClinicNotFound");
-//        TextView clinic = (TextView) findViewById(R.id.clinicName);
-//        clinic.setText(clinicChoiceString);
-//        Calendar calendar = Calendar.getInstance();
-//        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-//        timeString = format.format(calendar.getTime());
-//        TextView time = (TextView) findViewById(R.id.bookingTime);
-//        time.setText(timeString);
-//        waitString = PreferenceManager.getDefaultSharedPreferences(this).getString(queuetime, "QueueNotFound");
-//        TextView wait = (TextView) findViewById(R.id.estimatedWaitingTime);
-//        wait.setText(waitString + " minutes");
+
+        // Get booking preference if user successfully made a booking
+        mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
+
+        // Get the Intent that start the BookingDetails Activity (ChooseClinic Activity)
+        Intent chooseClinicIntent = getIntent();
+
+        mBookingDetailsLayout = findViewById(R.id.layout_booking_details);
+        mUserPhoneNumberTextView = findViewById(R.id.tv_user_phone_number_value);
+        mHospitalNameTextView = findViewById(R.id.tv_chosen_clinic_name);
+        mBookingTimeTextView = findViewById(R.id.tv_booking_time);
+        mETATextView = findViewById(R.id.tv_chosen_clinic_eta);
+
+        mBookingMessageLayout = findViewById(R.id.layout_booking_message);
+        mBookingMessageTextView = findViewById(R.id.tv_booking_details_message);
+
+        mUserPhoneNumber = mUserPreferences.getString(getString(R.string.pref_user_phone_number_key), null);
+
+        // Get the Hospital that the user chooses in the ChooseClinic Activity
+        if (chooseClinicIntent.hasExtra(getString(R.string.intent_extra_chosen_hospital_key)) && mUserPhoneNumber != null) {
+            showBookingDetails();
+            mChosenHospital = chooseClinicIntent.getParcelableExtra(getString(R.string.intent_extra_chosen_hospital_key));
+            mUserPhoneNumberTextView.setText(mUserPhoneNumber);
+            mHospitalNameTextView.setText(mChosenHospital.getName());
+            mETATextView.setText(getString(R.string.eta_value, mChosenHospital.getTotalETA()));
+
+            DateFormat formatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+            mBookingTimeTextView.setText(formatter.format(new Date()));
+            
+            lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            getLocation();
+            initMap();
+        } else {
+            showErrorMessage();
+        }
 
     }
-    void getLocation(){
+
+    private void getLocation(){
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
         else{
             Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location != null) {
-                latti = location.getLatitude();
-                longi = location.getLongitude();
+                myLat = location.getLatitude();
+                myLong = location.getLongitude();
             }
         }
     }
@@ -118,35 +159,153 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
             mGoogleMap.setMyLocationEnabled(true);
         }
 
-        goToLocation(latti, longi, 12);
+        goToLocation(myLat, myLong, 12);
 
     }
 
-    private void goToLocation(double lat, double lng, float zoom) {
-//        clinicChoiceString = PreferenceManager.getDefaultSharedPreferences(this).getString(clinicdetails, "ClinicNotFound");
-        for (i = 0; i< clinics.length; i++) {
-            if (clinicChoiceString.equals(clinics[i])) {
-                clinic = new LatLng(lats[i], lngs[i]);
-                break;
-            }
-        }
-        lat = (lat + lats[i])/2;
-        lng = (lng + lngs[i])/2;
-        LatLng show = new LatLng(lat,lng);
-        mGoogleMap.addMarker(new MarkerOptions().position(clinic).title(clinicChoiceString));
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(show, zoom);
-        mGoogleMap.moveCamera(update);
+    private void goToLocation(double myLat, double myLng, float zoom) {
+        double hospitalLat = mChosenHospital.getLat();
+        double hospitalLng = mChosenHospital.getLng();
+        LatLng me = new LatLng(myLat,myLng);
+        LatLng hospital = new LatLng(hospitalLat, hospitalLng);
+        LatLngBounds bounds = new LatLngBounds.Builder()
+                .include(me).include(hospital).build();
+        mGoogleMap.addMarker(new MarkerOptions().position(hospital).title(mChosenHospital.getName()));
+        CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds,150);
+        mGoogleMap.animateCamera(update);
 
+
+    }
+
+    private void submitBooking() {
+        Uri submitUri = Uri.parse(serverUrl).buildUpon()
+                .appendPath("api")
+                .appendPath("booking")
+                .build();
+        RequestBody requestBody = new FormBody.Builder()
+                .add("phoneNumber", mUserPhoneNumber)
+                .add("hospitalID",String.valueOf(mChosenHospital.getId()))
+                .add("eta", String.valueOf(mChosenHospital.getTotalETA()))
+                .build();
+        Request request = new Request.Builder().url(submitUri.toString())
+                .post(requestBody).build();
+
+        mHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "Error creating new Booking");
+                Log.e(TAG, e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showErrorAlert();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.code() == HttpURLConnection.HTTP_CREATED) {
+                    String body = response.body().string();
+                    try {
+                        JSONObject bookingResponse = new JSONObject(body);
+                        String tid = bookingResponse.getString("tid");
+                        if (tid != null && !TextUtils.isEmpty(tid)) {
+                            mBookingPreferences.edit().putString(getString(R.string.pref_booking_tid_key), tid).apply();
+                            startActivity(new Intent(BookingDetails.this, BookingComplete.class));
+                            BookingDetails.this.finish();
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "failed to parse json response for opened hospitals");
+                        Log.e(TAG,e.getMessage());
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                showErrorAlert();
+                            }
+                        });
+                    }
+                } else if (response.code() == HttpURLConnection.HTTP_CONFLICT) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showDuplicateBookingAlert();
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showErrorAlert();
+                        }
+                    });
+                }
+
+            }
+
+            void showErrorAlert() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(BookingDetails.this);
+                builder.setMessage(R.string.submit_booking_error)
+                        .setPositiveButton(R.string.retry_label, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(BookingDetails.this, ChooseClinic.class));
+                                BookingDetails.this.finish();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+            void showDuplicateBookingAlert() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(BookingDetails.this);
+                builder.setMessage(R.string.duplicate_booking_error)
+                        .setPositiveButton(R.string.view_my_queue, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(BookingDetails.this, MyQueue.class));
+                                BookingDetails.this.finish();
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,ChooseClinic.class));
+        this.finish();
+    }
+
+    private void showBookingDetails() {
+        mBookingMessageLayout.setVisibility(View.INVISIBLE);
+        mBookingDetailsLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showErrorMessage() {
+        mBookingDetailsLayout.setVisibility(View.INVISIBLE);
+        mBookingMessageLayout.setVisibility(View.VISIBLE);
+        mBookingMessageTextView.setText(R.string.booking_details_error);
+    }
+
+    private void showSubmitingBookingMessage () {
+        mBookingDetailsLayout.setVisibility(View.INVISIBLE);
+        mBookingMessageLayout.setVisibility(View.VISIBLE);
+        mBookingMessageTextView.setText(R.string.submit_booking_message);
 
     }
 
 
     public void confirmBookingButton(View view) {
-        startActivity(new Intent(this, BookingComplete.class));
-
+        showSubmitingBookingMessage();
+        submitBooking();
     }
 
     public void cancelBookingButton(View view) {
-        startActivity(new Intent(this, HomePage.class));
+        startActivity(new Intent(this, ChooseClinic.class));
+        this.finish();
     }
 }

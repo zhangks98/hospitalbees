@@ -5,23 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.HomePage">
-
-    <TextView
-        android:id="@+id/homeText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="20dp"
-        android:text="@string/home"
-        android:textAlignment="textStart"
-        android:gravity="start"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
@@ -31,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/logout"
         android:textAlignment="textStart"
-        android:gravity="start"
+        android:gravity="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +32,7 @@
         android:padding="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bookAppointmentButton"
@@ -130,16 +113,13 @@
         card_view:layout_constraintRight_toRightOf="parent"
         card_view:layout_constraintLeft_toLeftOf="parent"
         android:clickable="true"
-        card_view:layout_constraintTop_toBottomOf="@id/homeText"
-        android:visibility="gone"
-        >
+        card_view:layout_constraintTop_toBottomOf="parent"
+        android:visibility="gone" >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-
-            >
+            android:padding="15dp" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -147,7 +127,6 @@
                 android:id="@+id/homepage_cv_title"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:text="@string/queuenumber_text"
                 android:textSize="24sp"
                 />
 
@@ -157,14 +136,8 @@
                 android:id="@+id/homepage_cv_number"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:textSize="30sp"
-                android:text="1024"
-                />
-
+                android:textSize="30sp" />
         </RelativeLayout>
-
-
-
     </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
