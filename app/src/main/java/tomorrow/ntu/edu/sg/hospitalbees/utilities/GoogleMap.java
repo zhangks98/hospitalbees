@@ -56,7 +56,7 @@ public final class GoogleMap {
     }
 
     public static void main(String... args) throws Exception {
-        Hospital test_Hospital_One = new Hospital(1, "Ng Teng Fong General Hospital");
+        /*Hospital test_Hospital_One = new Hospital(1, "Ng Teng Fong General Hospital");
         Hospital test_Hospital_Two = new Hospital(2, "NTU Fullerton Health");
         test_Hospital_One.setQueueLength(2);
         test_Hospital_One.setTotalETA(15);
@@ -70,7 +70,9 @@ public final class GoogleMap {
         Collections.sort(hospitalList);
         for(int i=0; i< hospitalList.size(); i++){
             System.out.println(hospitalList.get(i).getName());
+
         }
+        */
         //String fakelocation[] = {"Ng Teng Fong General Hospital", "NTU Fullerton Health"};
         //new GoogleMap().run("NTU Singapore", fakelocation);
     }
