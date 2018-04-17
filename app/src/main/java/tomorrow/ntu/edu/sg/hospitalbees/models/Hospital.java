@@ -3,13 +3,17 @@ package tomorrow.ntu.edu.sg.hospitalbees.models;
 public class Hospital {
     private final int id;
     private final String name;
+    private final double lat;
+    private final double lng;
     private int queueLength;
     private int travelTime;
     private int totalETA;
 
-    public Hospital (int id, String name) {
+    public Hospital(int id, String name, double lat, double lng) {
         this.id = id;
         this.name = name;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public int getId() {

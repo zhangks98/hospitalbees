@@ -127,7 +127,7 @@
         app:layout_constraintBottom_toTopOf="@id/tv_qr_bottom_reminder" />
 
     <ProgressBar
-        android:id="@+id/pb_load_queue_view"
+        android:id="@+id/pb_load_my_queue"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

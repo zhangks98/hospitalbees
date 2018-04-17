@@ -30,6 +30,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <application
+        android:name=".HBApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -82,10 +83,10 @@
         </activity>
         <activity
             android:name=".BookingDetails"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".ChooseClinic">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ChooseClinic" />
         </activity>
         <activity
             android:name=".BookingComplete"

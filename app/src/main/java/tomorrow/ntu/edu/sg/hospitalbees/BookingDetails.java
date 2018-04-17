@@ -28,12 +28,6 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.clinicdetails;
-import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.queuetime;
-import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.traveldetails;
-
-//import static tomorrow.ntu.edu.sg.hospitalbees.ClinicAdapter.clinicdetails;
-//import static tomorrow.ntu.edu.sg.hospitalbees.LoginActivity.logindetails;
 
 public class BookingDetails extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -71,17 +65,17 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
         loginNameString = mUserPreferences.getString(getString(R.string.pref_user_phone_number_key), null);
         TextView username = (TextView) findViewById(R.id.editUserName);
         username.setText(loginNameString);
-        clinicChoiceString = PreferenceManager.getDefaultSharedPreferences(this).getString(clinicdetails, "ClinicNotFound");
-        TextView clinic = (TextView) findViewById(R.id.clinicName);
-        clinic.setText(clinicChoiceString);
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        timeString = format.format(calendar.getTime());
-        TextView time = (TextView) findViewById(R.id.bookingTime);
-        time.setText(timeString);
-        waitString = PreferenceManager.getDefaultSharedPreferences(this).getString(queuetime, "QueueNotFound");
-        TextView wait = (TextView) findViewById(R.id.estimatedWaitingTime);
-        wait.setText(waitString + " minutes");
+//        clinicChoiceString = PreferenceManager.getDefaultSharedPreferences(this).getString(clinicdetails, "ClinicNotFound");
+//        TextView clinic = (TextView) findViewById(R.id.clinicName);
+//        clinic.setText(clinicChoiceString);
+//        Calendar calendar = Calendar.getInstance();
+//        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+//        timeString = format.format(calendar.getTime());
+//        TextView time = (TextView) findViewById(R.id.bookingTime);
+//        time.setText(timeString);
+//        waitString = PreferenceManager.getDefaultSharedPreferences(this).getString(queuetime, "QueueNotFound");
+//        TextView wait = (TextView) findViewById(R.id.estimatedWaitingTime);
+//        wait.setText(waitString + " minutes");
 
     }
     void getLocation(){
@@ -129,7 +123,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     }
 
     private void goToLocation(double lat, double lng, float zoom) {
-        clinicChoiceString = PreferenceManager.getDefaultSharedPreferences(this).getString(clinicdetails, "ClinicNotFound");
+//        clinicChoiceString = PreferenceManager.getDefaultSharedPreferences(this).getString(clinicdetails, "ClinicNotFound");
         for (i = 0; i< clinics.length; i++) {
             if (clinicChoiceString.equals(clinics[i])) {
                 clinic = new LatLng(lats[i], lngs[i]);

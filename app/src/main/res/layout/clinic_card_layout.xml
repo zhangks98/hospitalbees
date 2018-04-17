@@ -3,13 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="wrap_content"
     android:id="@+id/clinic_card_view"
-    android:layout_margin="5dp"
-    card_view:cardBackgroundColor="#DCDCDC"
-    card_view:cardCornerRadius="12dp"
-    card_view:cardElevation="3dp"
-    card_view:contentPadding="4dp"
+    android:layout_margin="16dp"
+    card_view:cardElevation="2dp"
+    card_view:contentPadding="8dp"
     android:foreground="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
@@ -18,15 +16,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:padding="8dp"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/clinic_title"
-            android:textAlignment="center"
-            android:textSize="25sp"
+            android:textSize="34sp"
+            android:paddingBottom="8dp"
             />
 
         <TextView
@@ -88,10 +86,6 @@
             android:text="@string/total_time"
             android:textSize="20sp"
             />
-
-
-
-
 
     </RelativeLayout>
 

@@ -1,7 +1,6 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.adaptors;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 
 
 public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
