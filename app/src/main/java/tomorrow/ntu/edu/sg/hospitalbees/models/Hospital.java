@@ -1,6 +1,8 @@
 package tomorrow.ntu.edu.sg.hospitalbees.models;
 
-public class Hospital {
+import android.support.annotation.NonNull;
+
+public class Hospital implements Comparable{
     private final int id;
     private final String name;
     private int queueLength;
@@ -43,4 +45,12 @@ public class Hospital {
     public void setTotalETA(int totalETA) {
         this.totalETA = totalETA;
     }
+
+    @Override
+    public int compareTo(Object compareHospital) {
+        int compareETA=((Hospital)compareHospital).getTotalETA();
+        /* For Ascending order*/
+        return this.totalETA-compareETA;
+    }
 }
+
