@@ -11,11 +11,25 @@ import android.widget.TextView;
 
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.FaqAdapter;
 
+/**
+ * The class for showing Faq.
+ */
 public class FAQ extends AppCompatActivity implements View.OnClickListener{
 
     RecyclerView faqRV;
+
+
     TextView quickSelect;
-    Button fever, cough, diarrhoea, headache, sorethroat ;
+
+    Button fever,
+
+    cough,
+
+    diarrhoea,
+
+    headache,
+
+    sorethroat ;
 
 
     @Override
@@ -38,11 +52,21 @@ public class FAQ extends AppCompatActivity implements View.OnClickListener{
     }
 
 
+    /**
+     * Method that return to home page by clicking the back button.
+     *
+     * @param view the back button view
+     */
     public void backButton(View view) {
         startActivity(new Intent(this, HomePage.class));
 
     }
 
+    /**
+     * Search button.
+     *
+     * @param view the view
+     */
     public void searchButton(View view) {
     }
 

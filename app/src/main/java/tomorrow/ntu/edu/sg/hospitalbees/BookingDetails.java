@@ -51,13 +51,16 @@ import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
 
+/**
+ * The class for showing the details of a complete booking
+ */
 public class BookingDetails extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final int REQUEST_LOCATION = 1;
     private static final String TAG = "BookingDetails";
     private static final String serverUrl = BuildConfig.SERVER_URL;
-
     GoogleMap mGoogleMap;
+
     LocationManager lm;
 
     private SharedPreferences mUserPreferences, mBookingPreferences;
@@ -69,6 +72,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
 
     private String mUserPhoneNumber;
     private double myLat, myLong;
+
 
     @Inject
     OkHttpClient mHttpClient;
@@ -299,11 +303,21 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     }
 
 
+    /**
+     * Method that will confirm the booking once the confirm button has been clicked
+     *
+     * @param view the confirm button view
+     */
     public void confirmBookingButton(View view) {
         showSubmitingBookingMessage();
         submitBooking();
     }
 
+    /**
+     * method that will cancel the booking once the cancel button has been clicked
+     *
+     * @param view the cancel button view
+     */
     public void cancelBookingButton(View view) {
         startActivity(new Intent(this, ChooseClinic.class));
         this.finish();

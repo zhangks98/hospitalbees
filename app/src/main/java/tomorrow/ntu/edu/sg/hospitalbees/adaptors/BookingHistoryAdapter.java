@@ -13,10 +13,16 @@ import java.text.SimpleDateFormat;
 import tomorrow.ntu.edu.sg.hospitalbees.R;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Booking;
 
+/**
+ * The type Booking history adapter.
+ */
 public class BookingHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Booking[] mBookingHistoryList;
 
+    /**
+     * Instantiates a new Booking history adapter.
+     */
     public BookingHistoryAdapter () {
 
     }
@@ -43,11 +49,28 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return (mBookingHistoryList == null) ? 0 : mBookingHistoryList.length;
     }
 
+    /**
+     * The type Booking history view holder.
+     */
     public static class BookingHistoryViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * The M hospital name text view.
+         */
         TextView mHospitalNameTextView;
+        /**
+         * The M booking date text view.
+         */
         TextView mBookingDateTextView;
+        /**
+         * The M booking status text view.
+         */
         TextView mBookingStatusTextView;
 
+        /**
+         * Instantiates a new Booking history view holder.
+         *
+         * @param itemView the item view
+         */
         public BookingHistoryViewHolder(View itemView) {
             super(itemView);
             mHospitalNameTextView = itemView.findViewById(R.id.tv_history_hospital_name);

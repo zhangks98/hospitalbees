@@ -12,6 +12,9 @@ import javax.inject.Inject;
 import okhttp3.OkHttpClient;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.BookingHistoryAdapter;
 
+/**
+ * The class for showing the booking history
+ */
 public class BookingHistory extends AppCompatActivity {
     RecyclerView recentMonthRV;
 
