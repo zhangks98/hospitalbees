@@ -16,22 +16,31 @@ public class LocationDuration extends AppCompatActivity implements GeoTask.Geo {
     public static String travellist = "TravelList";
     String str_from;
     public String minlist = "";
+    Hospital hosp[] = new Hospital[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_duration);
-        Hospital hosp1 = new Hospital(1001, "Ng Teng Fong Hospital");
-        Hospital hosp2 = new Hospital(1002, "NTU Fullerton Health");
-        Hospital hosp3 = new Hospital(1003, "Jurong Polyclinic");
+        hosp[0] = new Hospital(1001, "Ng Teng Fong Hospital", 1.335082, 103.745198 );
+        hosp[1] = new Hospital(1002, "NTU Fullerton Health", 1.345690, 103.682677);
+        hosp[2] = new Hospital(1003, "Jurong Polyclinic", 1.350060, 103.730598);
         int no_of_hospital = 3;
         String str_to[] = new String[no_of_hospital];
-        str_to[0] = hosp1.getName();
-        str_to[1] = hosp2.getName();
-        str_to[2] = hosp3.getName();
+        String all_hosp_latlng = "";
+        for (int i = 0; i< no_of_hospital; i++) {
+            str_to[i] = Double.toString(hosp[i].getLat()) + "," + Double.toString(hosp[i].getLng());
+            all_hosp_latlng = all_hosp_latlng + str_to[i];
+            if (i == no_of_hospital-1) {
+                break;
+            }
+            else{
+                all_hosp_latlng = all_hosp_latlng + "|";
+            }
+        }
         str_from = currentlocation.replaceAll(" ", "%20");
-        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + str_to[0] + "|" + str_to[1] + "|" + str_to[2] + "&destinations=" + currentlocation + "&key=AIzaSyBzkZbcWIZvz1s6MX2rl_uMoqYXfQoFOkg";
-        new GeoTask(LocationDuration.this).execute(url);
+        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + all_hosp_latlng + "&destinations=" + currentlocation + "&key=AIzaSyBzkZbcWIZvz1s6MX2rl_uMoqYXfQoFOkg";
+//        new GeoTask(LocationDuration.this).execute(url);
 
         }
 
@@ -44,6 +53,7 @@ public class LocationDuration extends AppCompatActivity implements GeoTask.Geo {
         for (int i = 0; i< res.length ; i++) {
             min = Integer.parseInt(res[i]) / 60;
             minlist = minlist + Integer.toString(min) + ",";
+
         }
 
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString(travellist, minlist).apply();

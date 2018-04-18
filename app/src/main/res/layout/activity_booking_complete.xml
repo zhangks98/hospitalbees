@@ -12,11 +12,11 @@
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tick" />
+        app:srcCompat="@drawable/checkmark_done" />
 
     <TextView
         android:id="@+id/bookingCompleted"
@@ -25,19 +25,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tickImage"
-        android:layout_marginTop="30dp"
+        android:paddingTop="40dp"
         android:text="@string/booking_completed"
-        android:textSize="35sp"
+        android:textSize="40sp"
         android:textAlignment="center" />
 
     <TextView
         android:id="@+id/completionNotice"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bookingCompleted"
-        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/homeButton"
         android:text="@string/completion_notice"
         android:textSize="20sp"
         android:textAlignment="center" />
@@ -47,11 +48,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/completionNotice"
-        android:layout_marginLeft="50dp"
+        app:layout_constraintRight_toLeftOf="@+id/goToMyQueue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="96dp"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="20dp"
         android:text="@string/home"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:onClick="homeButton" />
 
     <Button
@@ -59,11 +62,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/completionNotice"
-        android:layout_marginRight="50dp"
+        app:layout_constraintLeft_toRightOf="@id/homeButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="96dp"
+        android:layout_marginEnd="56dp"
         android:layout_marginTop="20dp"
         android:text="@string/go_to_my_queue"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:onClick="MyQueue" />
 
 </android.support.constraint.ConstraintLayout>

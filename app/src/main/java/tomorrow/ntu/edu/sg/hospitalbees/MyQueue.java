@@ -30,6 +30,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Calendar;
 
+import javax.inject.Inject;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -47,10 +49,11 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private SharedPreferences mBookingPreferences;
     private com.google.zxing.Writer mQRCodeWriter;
 
-    private OkHttpClient mHttpClient;
+    @Inject
+    OkHttpClient mHttpClient;
 
-    private final String TAG = this.getClass().getSimpleName();
-    private final String serverUrl = BuildConfig.SERVER_URL;
+    private final static String TAG = "MyQueue";
+    private final static String serverUrl = BuildConfig.SERVER_URL;
 
     // TODO cache QR code BitMap
 
@@ -58,6 +61,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_queue);
+        ((HBApp) getApplication()).getNetComponent().inject(this);
 
         queueNumberLabelText = (TextView) findViewById(R.id.tv_queue_number_label);
         queueNumberValueText = (TextView) findViewById(R.id.tv_queue_number_value);
@@ -67,23 +71,15 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         qrTopReminderText = (TextView) findViewById(R.id.tv_qr_top_reminder);
         qrBottomReminderText = (TextView) findViewById(R.id.tv_qr_bottom_reminder);
         mQRCodeImage = (ImageView) findViewById(R.id.QRImage);
-        mLoadingInicator = findViewById(R.id.pb_load_queue_view);
+        mLoadingInicator = findViewById(R.id.pb_load_my_queue);
         mCreateBookingFAB = findViewById(R.id.fab_create_booking);
         mCreateBookingFAB.setOnClickListener(this);
 
         mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
         mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
-
-//        SharedPreferences.Editor editor = mBookingPreferences.edit();
-//        editor.putString(getString(R.string.pref_booking_tid_key), "00012018-04-16T08:35:45Z0012");
-//        editor.putString(getString(R.string.pref_booking_status_key), getString(R.string.pref_booking_status_absent_value));
-//        editor.commit();
-
         mBookingPreferences.registerOnSharedPreferenceChangeListener(this);
 
         mQRCodeWriter = new QRCodeWriter();
-        mHttpClient = new OkHttpClient();
-
         updateQueueActivity();
         updateBookingStatus();
     }
@@ -152,12 +148,17 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         if (mBookingPreferences != null) {
             String tid = mBookingPreferences.getString(getString(R.string.pref_booking_tid_key), null);
             if (tid != null) {
-                Uri queryUri = Uri.parse(serverUrl).buildUpon().appendPath("api").appendPath("booking").appendPath(tid).build();
+                Uri queryUri = Uri.parse(serverUrl).buildUpon()
+                        .appendPath("api")
+                        .appendPath("booking")
+                        .appendPath(tid)
+                        .build();
                 Request request = new Request.Builder().url(queryUri.toString()).get().build();
                 mHttpClient.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        e.printStackTrace();
+                        Log.e(TAG, "failed to update booking status");
+                        Log.e(TAG, e.getMessage());
                     }
 
                     @Override
@@ -195,7 +196,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
                                 }
                             } catch (JSONException e) {
                                 Log.e(TAG,"JSON parsing error");
-                                e.printStackTrace();
+                                Log.e(TAG, e.getMessage());
                             }
                         } else if (response.code() == HttpURLConnection.HTTP_GONE) {
                             // If query booking returns gone, it means a missed booking is already absent
@@ -287,6 +288,10 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private void setQueueNumber(String tid) {
         String queueNumber = TIDParser.getQueueNumber(tid);
         queueNumberValueText.setText(queueNumber);
+        setLengthBefore();
+    }
+
+    private void setLengthBefore() {
         int queueLengthBefore = mBookingPreferences.getInt((getString(R.string.pref_booking_length_before_key)), -2);
         if (queueLengthBefore > 0) {
             lengthBeforeValueText.setText(String.valueOf(queueLengthBefore));
@@ -300,7 +305,6 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         } else {
             lengthBeforeValueText.setText(getString(R.string.queue_length_before_unavailable_text));
             lengthBeforeLabelText.setVisibility(View.VISIBLE);
-
         }
     }
 
@@ -348,8 +352,9 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.pref_booking_status_key))) {
             updateQueueActivity();
+        } else if (key.equals(R.string.pref_booking_length_before_key)) {
+            setLengthBefore();
         }
-
     }
 
     @Override

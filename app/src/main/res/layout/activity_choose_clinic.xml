@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="tomorrow.ntu.edu.sg.hospitalbees.ChooseClinic">
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/clinic_recycler_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_hospitals"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="30dp">
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/clinic_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
 
-    </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    
+    <TextView
+        android:id="@+id/tv_error_fetch_clinic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/error_fetching_clinic"
+        android:textSize="34sp"
+        android:visibility="invisible" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_no_clinic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/no_open_clinic"
+        android:textSize="34sp"
+        android:visibility="invisible" />
+
+</FrameLayout>

@@ -3,6 +3,7 @@ package tomorrow.ntu.edu.sg.hospitalbees;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -38,17 +39,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         this.mBookingPreferences = getSharedPreferences(getString(R.string.pref_booking), Context.MODE_PRIVATE);
         FirebaseMessaging.getInstance().subscribeToTopic("news");
 
-//        set = getSharedPreferences(shareddata, 0);
-//        boolean returned = set.getBoolean(shareddata, false);
-
         homePageWording = (TextView) findViewById(R.id.homepageWordings);
-//        homePageCard = (CardView) findViewById(R.id.homepage_card_view);
-//        homePageCard.setOnClickListener(this);
-//
-//        if (returned) {
-//            homePageWording.setVisibility(View.GONE);
-//            homePageCard.setVisibility(View.VISIBLE);
-//        }
     }
 
     @Override
@@ -57,16 +48,12 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
             homePageWording.setVisibility(View.VISIBLE);
             homePageCard.setVisibility(View.GONE);
 
-//            SharedPreferences.Editor editor = set.edit();
-//            editor.putBoolean(shareddata, false);
-//            editor.apply();
-
         }
     }
 
 
     public void bookAppointmentButton(View view) {
-        startActivity(new Intent(this, LocationDuration.class));
+        startActivity(new Intent(this, ChooseClinic.class));
     }
 
     public void viewBookingHistoryButton(View view) {

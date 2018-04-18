@@ -14,11 +14,12 @@ public class BookingComplete extends AppCompatActivity {
     }
 
     public void homeButton(View view) {
-        startActivity(new Intent(this, HomePage.class));
+        this.finish();
 
     }
 
     public void MyQueue(View view) {
         startActivity(new Intent(this, MyQueue.class));
+        this.finish();
     }
 }

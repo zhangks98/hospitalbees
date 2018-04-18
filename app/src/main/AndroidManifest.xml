@@ -30,6 +30,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <application
+        android:name=".HBApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -49,6 +50,7 @@
         <activity android:name=".HomePage" />
         <activity
             android:name=".Alerts"
+            android:label="Alerts"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -56,6 +58,7 @@
         </activity>
         <activity
             android:name=".FAQ"
+            android:label="FAQ"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -75,20 +78,24 @@
         </activity>
         <activity
             android:name=".ChooseClinic"
-            android:parentActivityName=".HomePage">
+            android:label="Choose Clinic"
+            android:parentActivityName=".HomePage"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomePage" />
         </activity>
         <activity
             android:name=".BookingDetails"
-            android:parentActivityName=".HomePage">
+            android:label="Your Booking Details"
+            android:parentActivityName=".ChooseClinic">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ChooseClinic" />
         </activity>
         <activity
             android:name=".BookingComplete"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -96,6 +103,7 @@
         </activity>
         <activity
             android:name=".BookingHistory"
+            android:label="Booking History"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

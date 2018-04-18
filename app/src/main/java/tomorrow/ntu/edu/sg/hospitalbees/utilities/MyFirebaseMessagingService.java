@@ -45,13 +45,26 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
 
+import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
+import tomorrow.ntu.edu.sg.hospitalbees.HBApp;
 import tomorrow.ntu.edu.sg.hospitalbees.MyQueue;
 import tomorrow.ntu.edu.sg.hospitalbees.R;
 import tomorrow.ntu.edu.sg.hospitalbees.SplashActivity;
 
-import static android.content.ContentValues.TAG;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
+    private static final String TAG = "MyFCMService";
+
+    @Inject
+    OkHttpClient mHttpClient;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ((HBApp) getApplication()).getNetComponent().inject(this);
+    }
 
     /**
      * Called when message is received.
