@@ -3,6 +3,7 @@ package tomorrow.ntu.edu.sg.hospitalbees;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
 import static tomorrow.ntu.edu.sg.hospitalbees.LocationDuration.travellist;
 
@@ -37,18 +40,15 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     Context context;
-    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health"};
+
+    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health", "Jurong Polyclinic"};
+
     String traveltime[];
-    String queuelength[] = {"5", "2"};
-    String currentlocation = "NTU Hall 9";
+    String queuelength[] = {"5", "2", "7"};
 
     public static String clinicdetails = "ClinicChoice";
     public static String queuetime = "QueueTime";
     public static String traveldetails = "TravelDetails";
-
-
-
-
 
     public ClinicAdapter(Context context){
         this.context = context;
@@ -63,10 +63,6 @@ public class ClinicAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
         return clinicitem;
     }
-
-
-
-
 
     public String getTotalTime(String traveltime, String queuelength) {
         int traveltimeint = Integer.parseInt(traveltime);

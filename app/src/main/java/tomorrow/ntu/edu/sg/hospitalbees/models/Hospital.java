@@ -6,6 +6,8 @@ public class Hospital {
     private int queueLength;
     private int travelTime;
     private int totalETA;
+    private double lattitude;
+    private double longitude;
 
     public Hospital (int id, String name) {
         this.id = id;
@@ -42,5 +44,18 @@ public class Hospital {
 
     public void setTotalETA(int totalETA) {
         this.totalETA = totalETA;
+    }
+
+    public double getLattitude() {
+        return lattitude;
+    }
+    public void setLattitude( double lattitude) {
+        this.lattitude = lattitude;
+    }
+    public double getLongitude() {
+        return longitude;
+    }
+    public void setLongitude( double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -21,9 +21,8 @@ import java.net.URL;
 public class GeoTask extends AsyncTask<String, Void, String> {
     ProgressDialog pd;
     Context mContext;
-    Double duration;
     Geo geo1;
-    //constructor is used to get the context.
+
     public GeoTask(Context mContext) {
         this.mContext = mContext;
         geo1= (Geo) mContext;
@@ -66,22 +65,27 @@ public class GeoTask extends AsyncTask<String, Void, String> {
                     sb.append(line);
                     line=br.readLine();
                 }
+                String total_object_duration = "";
                 String json=sb.toString();
                 Log.d("JSON",json);
                 JSONObject root=new JSONObject(json);
                 JSONArray array_rows=root.getJSONArray("rows");
                 Log.d("JSON","array_rows:"+array_rows);
-                JSONObject object_rows=array_rows.getJSONObject(0);
-                Log.d("JSON","object_rows:"+object_rows);
-                JSONArray array_elements=object_rows.getJSONArray("elements");
-                Log.d("JSON","array_elements:"+array_elements);
-                JSONObject  object_elements=array_elements.getJSONObject(0);
-                Log.d("JSON","object_elements:"+object_elements);
-                JSONObject object_duration=object_elements.getJSONObject("duration");
-                JSONObject object_distance=object_elements.getJSONObject("distance");
+                for (int i = 0; i < array_rows.length() ; i++) {
+                    JSONObject object_rows = array_rows.getJSONObject(i);
+                    Log.d("JSON", "object_rows:" + object_rows);
+                    JSONArray array_elements = object_rows.getJSONArray("elements");
+                    Log.d("JSON", "array_elements:" + array_elements);
+                    JSONObject object_elements = array_elements.getJSONObject(0);
+                    Log.d("JSON", "object_elements:" + object_elements);
+                    JSONObject object_duration = object_elements.getJSONObject("duration");
+                    JSONObject object_distance = object_elements.getJSONObject("distance");
 
-                Log.d("JSON","object_duration:"+object_duration);
-                return object_duration.getString("value")+","+object_distance.getString("value");
+                    Log.d("JSON", "object_duration:" + object_duration);
+                    total_object_duration = total_object_duration + object_duration.getString("value") + ",";
+                }
+                Log.d("JSON", "total_object_duration:" + total_object_duration);
+                return total_object_duration;
 
             }
         } catch (MalformedURLException e) {

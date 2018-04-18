@@ -48,9 +48,9 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     LocationManager lm;
 
 
-    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health"};
-    double lats[] = {1.3340363, 1.344278};
-    double lngs[] = {103.7429231, 103.6815601};
+    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health", "Jurong Polyclinic"};
+    double lats[] = {1.3340363, 1.344278, 1.3497975};
+    double lngs[] = {103.7429231, 103.6815601, 103.7284303};
     double latti;
     double longi;
     LatLng clinic;
