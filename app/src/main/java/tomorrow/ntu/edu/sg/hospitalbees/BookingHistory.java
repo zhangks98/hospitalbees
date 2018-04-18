@@ -7,23 +7,28 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import javax.inject.Inject;
+
+import okhttp3.OkHttpClient;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.BookingHistoryAdapter;
 
+/**
+ * The class for showing the booking history
+ */
 public class BookingHistory extends AppCompatActivity {
     RecyclerView recentMonthRV;
+
+    @Inject
+    OkHttpClient mOkHttpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_history);
+        ((HBApp) getApplication()).getNetComponent().inject(this);
 
-        recentMonthRV = (RecyclerView) findViewById(R.id.recyclerview);
+        recentMonthRV = findViewById(R.id.recyclerview);
         recentMonthRV.setLayoutManager(new LinearLayoutManager(this));
-        recentMonthRV.setAdapter(new BookingHistoryAdapter(this));
-    }
-
-
-    public void backButton(View view) {
-        startActivity(new Intent(this, HomePage.class));
+        recentMonthRV.setAdapter(new BookingHistoryAdapter());
     }
 }

@@ -2,6 +2,9 @@ package tomorrow.ntu.edu.sg.hospitalbees;
 
 import android.app.Application;
 
+/**
+ * The type Hb app.
+ */
 public class HBApp extends Application{
     private NetComponent mNetComponent;
 
@@ -14,6 +17,11 @@ public class HBApp extends Application{
 
     }
 
+    /**
+     * Method that get the net component
+     *
+     * @return the net component
+     */
     public NetComponent getNetComponent() {
         return mNetComponent;
     }

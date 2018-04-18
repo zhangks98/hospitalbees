@@ -10,12 +10,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * The class for login activity
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     private EditText editName, editPassword;
-    String user[] = {"Gerald", "Qinan", "Fuhank", "Kaishuo", "Vansh"};
-    String pass[] = {"pass1", "pass2", "pass3", "pass4", "pass5"};
+
+    String user[] = {"90908080", "42576543", "77766689"};
+
+    String pass[] = {"pass1", "pass2", "pass3"};
 
 
 
@@ -28,6 +33,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Method that allows the User to log in the APP on by clicking the log in button.
+     * User can only log in if he keyed in the matching username and password to the database.
+     *
+     * @param view the log in button view
+     *
+     */
     public void logInButton(View view) {
         String name = editName.getText().toString();
         String password = editPassword.getText().toString();
@@ -52,9 +64,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Sign up button.
+     *
+     * @param view the view
+     */
     public void signUpButton(View view) {
     }
 
+    /**
+     * Forget password button.
+     *
+     * @param view the view
+     */
     public void forgetPasswordButton(View view) {
 
     }

@@ -50,6 +50,7 @@
         <activity android:name=".HomePage" />
         <activity
             android:name=".Alerts"
+            android:label="Alerts"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -57,6 +58,7 @@
         </activity>
         <activity
             android:name=".FAQ"
+            android:label="FAQ"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -76,13 +78,16 @@
         </activity>
         <activity
             android:name=".ChooseClinic"
-            android:parentActivityName=".HomePage">
+            android:label="Choose Clinic"
+            android:parentActivityName=".HomePage"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomePage" />
         </activity>
         <activity
             android:name=".BookingDetails"
+            android:label="Your Booking Details"
             android:parentActivityName=".ChooseClinic">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -90,6 +95,7 @@
         </activity>
         <activity
             android:name=".BookingComplete"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -97,6 +103,7 @@
         </activity>
         <activity
             android:name=".BookingHistory"
+            android:label="Booking History"
             android:parentActivityName=".HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -127,8 +134,6 @@
             android:name="tomorrow.ntu.edu.sg.hospitalbees.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
 
-        <activity android:name=".LocationDuration"></activity>
-        
         <service android:name="tomorrow.ntu.edu.sg.hospitalbees.utilities.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
