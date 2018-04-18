@@ -36,7 +36,13 @@ import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.ClinicAdapter;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
+<<<<<<< HEAD
+/**
+ * The class for Choosing clinic.
+ */
+=======
 
+>>>>>>> bb0e84ed1ba1b6612ccb5b2fc1b8de43d363692f
 public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.ClinicAdapterOnClickHandler {
 
 

@@ -39,6 +39,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.utilities.TIDParser;
 
+/**
+ * Class for showing the current queue
+ */
 public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener{
 
     private TextView queueNumberLabelText, queueNumberValueText, lengthBeforeLabelText, lengthBeforeValueText, queueBottomReminderText, qrTopReminderText, qrBottomReminderText;
@@ -104,6 +107,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     protected void updateQueueActivity() {
         showLoadingIndicator();
