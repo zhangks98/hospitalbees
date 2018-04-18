@@ -28,11 +28,14 @@ import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.BookingHistoryAdapter;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Booking;
 
+/**
+ * The class for showing the booking history
+ */
 public class BookingHistory extends AppCompatActivity {
     private static final String serverUrl = BuildConfig.SERVER_URL;
     private static final String TAG = "BookingHistory";
 
-    private SwipeRefreshLayout mmSwipeRefreshLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView recentMonthRV;
     private BookingHistoryAdapter mBookingAdapter;
     private SharedPreferences mUserPreferences;
@@ -47,12 +50,20 @@ public class BookingHistory extends AppCompatActivity {
         ((HBApp) getApplication()).getNetComponent().inject(this);
 
         mUserPreferences = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
-
+        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_booking_history);
         recentMonthRV = findViewById(R.id.recyclerview);
         recentMonthRV.setLayoutManager(new LinearLayoutManager(this));
         mBookingAdapter = new BookingHistoryAdapter();
         recentMonthRV.setAdapter(mBookingAdapter);
-
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchHistory();
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorAccent);
+        mSwipeRefreshLayout.setRefreshing(true);
         fetchHistory();
     }
 
@@ -71,7 +82,6 @@ public class BookingHistory extends AppCompatActivity {
                 public void onFailure(Call call, IOException e) {
                     Log.e(TAG, "Fail to fetching booking history");
                     Log.e(TAG, e.getMessage());
-
                 }
 
                 @Override
@@ -92,6 +102,7 @@ public class BookingHistory extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     mBookingAdapter.setBookingHistoryList(bookings);
+                                    mSwipeRefreshLayout.setRefreshing(false);
                                 }
                             });
                         } catch (JSONException e) {

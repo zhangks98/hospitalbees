@@ -39,6 +39,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.utilities.TIDParser;
 
+/**
+ * Class for showing the current queue
+ */
 public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener, View.OnClickListener{
 
     private TextView queueNumberLabelText, queueNumberValueText, lengthBeforeLabelText, lengthBeforeValueText, queueBottomReminderText, qrTopReminderText, qrBottomReminderText;
@@ -104,6 +107,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     protected void updateQueueActivity() {
         showLoadingIndicator();
@@ -303,7 +307,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
             lengthBeforeValueText.setText(getString(R.string.queue_length_before_approaching_text));
             lengthBeforeLabelText.setVisibility(View.INVISIBLE);
         } else {
-            lengthBeforeValueText.setText(getString(R.string.queue_length_before_unavailable_text));
+            lengthBeforeValueText.setText(getString(R.string.unavailable_text));
             lengthBeforeLabelText.setVisibility(View.VISIBLE);
         }
     }

@@ -1,7 +1,14 @@
 package tomorrow.ntu.edu.sg.hospitalbees;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -17,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -28,6 +35,10 @@ import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.ClinicAdapter;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
+/**
+ * The Activity class for Choosing clinic.
+ */
+
 public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.ClinicAdapterOnClickHandler {
 
 
@@ -37,7 +48,12 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
     private TextView mErrorMessageTextView, mNoClinicTextView;
 
     private static final String serverUrl = BuildConfig.SERVER_URL;
+    private static final String mapsApiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
     private static final String TAG = "ChooseClinic";
+
+    private static final int REQUEST_LOCATION = 1;
+    LocationManager lm;
+    private double myLat, myLng;
 
     @Inject
     OkHttpClient mHttpClient;
@@ -47,6 +63,7 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_clinic);
         ((HBApp) getApplication()).getNetComponent().inject(this);
+
 
         mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_hospitals);
         mClinicRecylerView = findViewById(R.id.clinic_recycler_view);
@@ -68,6 +85,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        getLocation();
         getOpenedHospitals();
 
     }
@@ -76,6 +95,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
     public void onHospitalItemClick(Hospital chosenHospital) {
         Intent startBookingDetailsIntent = new Intent(this, BookingDetails.class);
         startBookingDetailsIntent.putExtra(getString(R.string.intent_extra_chosen_hospital_key), chosenHospital);
+        startBookingDetailsIntent.putExtra(getString(R.string.intent_extra_my_lat_key), myLat);
+        startBookingDetailsIntent.putExtra(getString(R.string.intent_extra_my_lng_key), myLng);
         startActivity(startBookingDetailsIntent);
         this.finish();
     }
@@ -87,6 +108,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                 .appendPath("hospital")
                 .build();
         Request request = new Request.Builder().url(queryUri.toString()).get().build();
+
+
 
         mHttpClient.newCall(request).enqueue(new Callback() {
             @Override
@@ -109,7 +132,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                         final String body = response.body().string();
                         JSONArray jsonArray = new JSONArray(body);
                         final Hospital[] hospitals = new Hospital[jsonArray.length()];
-                        for (int i = 0; i < hospitals.length; i++) {
+
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject hospitalObject = jsonArray.getJSONObject(i);
                             int id = hospitalObject.getInt("id");
                             String name = hospitalObject.getString("name");
@@ -119,6 +143,59 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             Hospital hospitalPOJO = new Hospital(id, name, lat, lng);
                             hospitalPOJO.setQueueLength(queueLength);
                             hospitals[i] = hospitalPOJO;
+                        }
+
+                        sortHospitalByTravelTime(hospitals);
+
+
+                    } catch (JSONException e) {
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        showErrorMessage();
+                        Log.e(TAG, "failed to parse json response for opened hospitals");
+                        Log.e(TAG,e.getMessage());
+                    }
+                }
+            }
+        });
+    }
+
+    protected void fetchHospitalTravelTime (final Hospital[] hospitals, String origins, String destinations) {
+        Uri queryUri = Uri.parse(mapsApiUrl).buildUpon()
+                .appendQueryParameter("origins", origins)
+                .appendQueryParameter("destinations", destinations)
+                .appendQueryParameter("key", "AIzaSyBzkZbcWIZvz1s6MX2rl_uMoqYXfQoFOkg")
+                .build();
+        Log.d(TAG,queryUri.toString());
+        Request request = new Request.Builder().get().url(queryUri.toString()).build();
+
+        mHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String jsonString = response.body().string();
+                    try {
+                        JSONObject root = new JSONObject(jsonString);
+                        JSONArray array_rows = root.getJSONArray("rows");
+                        Log.d("JSON", "array_rows:" + array_rows);
+                        JSONObject object_rows = array_rows.getJSONObject(0);
+                        Log.d("JSON", "object_rows:" + object_rows);
+                        JSONArray array_elements = object_rows.getJSONArray("elements");
+                        Log.d("JSON", "array_elements:" + array_elements);
+                        for (int i = 0; i < array_elements.length(); i++) {
+                            JSONObject object_elements = array_elements.getJSONObject(i);
+                            Log.d("JSON", "object_elements:" + object_elements);
+                            JSONObject object_duration = object_elements.getJSONObject("duration");
+                            Log.d("JSON", "object_duration:" + object_duration);
+                            hospitals[i].setTravelTime(object_duration.getInt("value")/60);
+                        }
+                        Arrays.sort(hospitals);
+                        for (int j=0; j<hospitals.length;j++) {
+                            Log.d("ARRAYRESULTS", "arrayRESULT:" + hospitals[j].getTotalETA());
                         }
 
                         runOnUiThread(new Runnable() {
@@ -135,17 +212,59 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             }
                         });
                     } catch (JSONException e) {
-                        mSwipeRefreshLayout.setRefreshing(false);
-                        showErrorMessage();
-                        Log.e(TAG, "failed to parse json response for opened hospitals");
+                        Log.e(TAG,"Error parsing Maps API Travel Time json");
                         Log.e(TAG,e.getMessage());
+                        for (Hospital hospital: hospitals) {
+                            hospital.setTravelTime(-1);
+                        }
                     }
                 }
             }
         });
     }
 
-//    private void sortHospitalByTravelTime(Hospital[] hospitals)
+    private void sortHospitalByTravelTime(Hospital[] hospitals){
+        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        String currentlocation = Double.toString(myLat) + "," + Double.toString(myLng);
+        String str_to[] = new String[hospitals.length];
+        String all_hosp_latlng = "";
+        for (int i = 0; i< hospitals.length; i++) {
+            str_to[i] = Double.toString(hospitals[i].getLat()) + "," + Double.toString(hospitals[i].getLng());
+            all_hosp_latlng = all_hosp_latlng + str_to[i];
+            if (i == hospitals.length-1) {
+                break;
+            }
+            else{
+                all_hosp_latlng = all_hosp_latlng + "|";
+            }
+        }
+        fetchHospitalTravelTime(hospitals, currentlocation, all_hosp_latlng);
+
+    }
+
+    private void getLocation(){
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+        else{
+            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (location != null) {
+                myLat = location.getLatitude();
+                myLng = location.getLongitude();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_LOCATION:
+                getLocation();
+                break;
+        }
+    }
 
     private void showErrorMessage() {
         mErrorMessageTextView.setVisibility(View.VISIBLE);

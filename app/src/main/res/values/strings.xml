@@ -18,7 +18,10 @@
     <string name="view_faq">FAQs</string>
     <string name="view_alerts">Alerts</string>
 
-    <!-- Strings related to chooseClinic Activity-->
+    <string name="notice_text">Hello User, this is a warning text to let you know that our services currently only include areas in the west. Thank you for your understanding and we are sorry for the inconvenience!</string>
+
+
+    <!--String related to ChooseClinic Activity-->
     <string name="queue_length">Queue Length</string>
     <string name="travel_time">Travel Time</string>
     <string name="total_time">Total Time</string>
@@ -81,7 +84,7 @@
 
     <string name="queuenumber_text">Your \'Q\' Number</string>
     <string name="queue_length_before_text">Patients In Front of You</string>
-    <string name="queue_length_before_unavailable_text">Unavailable</string>
+    <string name="unavailable_text">Unavailable</string>
     <string name="queue_length_before_approaching_text">You\'ll be Notified shortly</string>
     <string name="queue_length_before_notified_text">Q Number is Notified!</string>
     <string name="queue_reminder_text_active">Numbers may not be called in order</string>
@@ -132,6 +135,9 @@
 
     <!--Keys for data passed between intents-->
     <string name="intent_extra_chosen_hospital_key" translatable="false">chosenBookingHospital</string>
+    <string name="intent_extra_my_lat_key" translatable="false">myLat</string>
+    <string name="intent_extra_my_lng_key" translatable="false">myLng</string>
+
 
 
 
