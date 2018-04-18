@@ -1,7 +1,9 @@
 package tomorrow.ntu.edu.sg.hospitalbees.adaptors;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +19,6 @@ import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
  * The type Clinic adapter.
  */
 public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicAdapterViewHolder> {
-
 
     private Hospital[] mHospitalList;
 
@@ -109,11 +110,17 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicAdap
 
     @Override
     public void onBindViewHolder(@NonNull ClinicAdapterViewHolder holder, int position) {
+        Context context = (Context) mClickHandler;
         Hospital thisHospital = mHospitalList[position];
         holder.mClinicTitleTextView.setText(thisHospital.getName());
         holder.mClinicQueueLengthTextView.setText(String.valueOf(thisHospital.getQueueLength()));
-        holder.mClinicTravelTimeTextView.setText(String.valueOf(thisHospital.getTravelTime()) + " Min");
-        holder.mClinicTotalETATextView.setText(String.valueOf(thisHospital.getTotalETA()) + " Min");
+        if (thisHospital.getTravelTime() >= 0) {
+            holder.mClinicTravelTimeTextView.setText(context.getString(R.string.eta_value, thisHospital.getTravelTime()));
+        } else {
+            holder.mClinicQueueLengthTextView.setText(context.getString(R.string.unavailable_text));
+        }
+        holder.mClinicTotalETATextView.setText(context.getString(R.string.eta_value, thisHospital.getTotalETA()));
+
     }
 
     @Override
