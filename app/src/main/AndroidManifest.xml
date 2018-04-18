@@ -71,10 +71,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomePage" />
-            <intent-filter>
-                <action android:name="MYQUEUE" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ChooseClinic"
@@ -87,12 +83,7 @@
         </activity>
         <activity
             android:name=".BookingDetails"
-            android:label="Your Booking Details"
-            android:parentActivityName=".ChooseClinic">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ChooseClinic" />
-        </activity>
+            android:label="Your Booking Details"/>
         <activity
             android:name=".BookingComplete"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"

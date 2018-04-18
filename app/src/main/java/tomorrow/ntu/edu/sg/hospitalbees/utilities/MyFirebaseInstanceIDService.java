@@ -87,10 +87,14 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         if (phoneNumber != null) {
             Uri updateToken = Uri.parse(serverUrl).buildUpon()
                     .appendPath("api")
+                    .appendPath("user")
                     .appendPath(phoneNumber)
+                    .appendPath("fcmToken")
                     .appendPath(token)
                     .build();
-            Request request = new Request.Builder().url(updateToken.toString()).put(null).build();
+            Log.d(TAG, "serverUrl " + updateToken.toString());
+            RequestBody reqbody = RequestBody.create(null, new byte[0]);
+            Request request = new Request.Builder().url(updateToken.toString()).put(reqbody).build();
             mHttpClient.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {

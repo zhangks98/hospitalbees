@@ -1,12 +1,15 @@
 package tomorrow.ntu.edu.sg.hospitalbees;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -51,6 +54,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     private SharedPreferences mUserPreferences;
     private SharedPreferences mBookingPreferences;
     private com.google.zxing.Writer mQRCodeWriter;
+    BroadcastReceiver br;
 
     @Inject
     OkHttpClient mHttpClient;
@@ -65,6 +69,15 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_queue);
         ((HBApp) getApplication()).getNetComponent().inject(this);
+
+        br = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateBookingStatus();
+            }
+        };
+        IntentFilter filter = new IntentFilter("REFRESH_Q");
+        LocalBroadcastManager.getInstance(this).registerReceiver(br, filter);
 
         queueNumberLabelText = (TextView) findViewById(R.id.tv_queue_number_label);
         queueNumberValueText = (TextView) findViewById(R.id.tv_queue_number_value);
@@ -91,6 +104,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     protected void onDestroy() {
         super.onDestroy();
         mBookingPreferences.unregisterOnSharedPreferenceChangeListener(this);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(br);
     }
 
     @Override

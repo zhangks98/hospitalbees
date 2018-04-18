@@ -198,6 +198,14 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             Log.d("ARRAYRESULTS", "arrayRESULT:" + hospitals[j].getTotalETA());
                         }
 
+                    } catch (JSONException e) {
+                        Log.e(TAG,"Error parsing Maps API Travel Time json");
+                        Log.e(TAG,e.getMessage());
+                        for (Hospital hospital: hospitals) {
+                            hospital.setTravelTime(-1);
+                        }
+
+                    } finally {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -211,12 +219,6 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                                 }
                             }
                         });
-                    } catch (JSONException e) {
-                        Log.e(TAG,"Error parsing Maps API Travel Time json");
-                        Log.e(TAG,e.getMessage());
-                        for (Hospital hospital: hospitals) {
-                            hospital.setTravelTime(-1);
-                        }
                     }
                 }
             }

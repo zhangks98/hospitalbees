@@ -14,6 +14,7 @@ public interface NetComponent {
     void inject(MyQueue activity);
     void inject(Alerts activity);
     void inject(BookingHistory activity);
+    void inject(BookingComplete activity);
     void inject(MyFirebaseInstanceIDService service);
     void inject(MyFirebaseMessagingService service);
 }
