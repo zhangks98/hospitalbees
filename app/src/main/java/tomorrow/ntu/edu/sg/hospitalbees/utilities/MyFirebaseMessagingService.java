@@ -95,12 +95,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             try {
                 JSONObject data = new JSONObject(remoteMessage.getData());
-                String action = data.getString("action");
-                Log.d(TAG, "onMessageReceived: \n" +
-                        "Extra Information: " + action);
-                Intent intent = new Intent();
-                intent.setAction(action);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                if (data.has("action")) {
+                    String action = data.getString("action");
+                    Log.d(TAG, "onMessageReceived: \n" +
+                            "Extra Information: " + action);
+                    Intent intent = new Intent();
+                    intent.setAction(action);
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
