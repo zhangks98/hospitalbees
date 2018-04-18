@@ -45,15 +45,15 @@ public class LoginActivity extends AppCompatActivity {
         String password = editPassword.getText().toString();
         int i;
         for (i = 0; i< user.length; i++) {
-            if ((name.equals(user[i])) && (password.equals(pass[i]))) {
-                SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE).edit();
-                editor.putBoolean(getString(R.string.pref_user_is_logged_in_key), true);
-                editor.putString(getString(R.string.pref_user_phone_number_key), user[i]);
-                editor.apply();
-                startActivity(new Intent(this, HomePage.class));
-                this.finish();
-                break;
-            }
+                if ((name.equals(user[i])) && (password.equals(pass[i]))) {
+                    SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE).edit();
+                    editor.putBoolean(getString(R.string.pref_user_is_logged_in_key), true);
+                    editor.putString(getString(R.string.pref_user_phone_number_key), user[i]);
+                    editor.apply();
+                    startActivity(new Intent(this, HomePage.class));
+                    this.finish();
+                    break;
+                }
         }
         if (i == user.length) {
             Toast.makeText(getApplicationContext(), "WRONG CREDENTIALS", Toast.LENGTH_SHORT).show();

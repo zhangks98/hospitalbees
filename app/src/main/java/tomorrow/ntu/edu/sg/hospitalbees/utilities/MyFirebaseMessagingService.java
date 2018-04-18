@@ -67,11 +67,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         ((HBApp) getApplication()).getNetComponent().inject(this);
     }
 
-    /**
-     * Called when message is received.
-     *
-     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     */
+
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -129,9 +125,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     // [END receive_message]
 
-    /**
-     * Schedule a job using FirebaseJobDispatcher.
-     */
 //    private void scheduleJob() {
 //        // [START dispatch_job]
 //        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
@@ -143,9 +136,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        // [END dispatch_job]
 //    }
 
-    /**
-     * Handle time allotted to BroadcastReceivers.
-     */
+
     private void handleNow() {
         Log.d(TAG, "Short lived task is done.");
     }
