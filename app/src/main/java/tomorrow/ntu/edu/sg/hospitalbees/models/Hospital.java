@@ -2,8 +2,9 @@ package tomorrow.ntu.edu.sg.hospitalbees.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
-public class Hospital implements Parcelable{
+public class Hospital implements Parcelable, Comparable<Hospital>{
     private final int id;
     private final String name;
     private final double lat;
@@ -11,6 +12,8 @@ public class Hospital implements Parcelable{
     private int queueLength;
     private int travelTime;
     private int totalETA;
+
+    private static final int AVG_Q_WAITING_TIME = 10;
 
     public Hospital(int id, String name, double lat, double lng) {
         this.id = id;
@@ -87,6 +90,7 @@ public class Hospital implements Parcelable{
 
     public void setTravelTime(int travelTime) {
         this.travelTime = travelTime;
+        this.totalETA = Math.max(this.travelTime, this.queueLength * AVG_Q_WAITING_TIME);
     }
 
     public int getTotalETA() {
@@ -97,4 +101,9 @@ public class Hospital implements Parcelable{
         this.totalETA = totalETA;
     }
 
+    @Override
+    public int compareTo(@NonNull Hospital compareHospital) {
+        int compareETA = ((Hospital) compareHospital).getTotalETA();
+        return this.totalETA - compareETA;
+    }
 }

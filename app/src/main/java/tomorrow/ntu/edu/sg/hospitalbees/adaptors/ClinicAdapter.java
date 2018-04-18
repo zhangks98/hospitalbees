@@ -71,8 +71,8 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicAdap
         Hospital thisHospital = mHospitalList[position];
         holder.mClinicTitleTextView.setText(thisHospital.getName());
         holder.mClinicQueueLengthTextView.setText(String.valueOf(thisHospital.getQueueLength()));
-        holder.mClinicTravelTimeTextView.setText(String.valueOf(thisHospital.getTravelTime()));
-        holder.mClinicTotalETATextView.setText(String.valueOf(thisHospital.getTotalETA()));
+        holder.mClinicTravelTimeTextView.setText(String.valueOf(thisHospital.getTravelTime()) + " Min");
+        holder.mClinicTotalETATextView.setText(String.valueOf(thisHospital.getTotalETA()) + " Min");
     }
 
     @Override
