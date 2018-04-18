@@ -21,7 +21,7 @@ public class TIDParser {
 
     public static Date getBookingDate(String tid) {
         try {
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
             String bookingTime = tid.substring(4, tid.length() - 4);
             return formatter.parse(bookingTime);

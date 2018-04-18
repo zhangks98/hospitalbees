@@ -109,7 +109,7 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                         final String body = response.body().string();
                         JSONArray jsonArray = new JSONArray(body);
                         final Hospital[] hospitals = new Hospital[jsonArray.length()];
-                        for (int i = 0; i < jsonArray.length(); i++) {
+                        for (int i = 0; i < hospitals.length; i++) {
                             JSONObject hospitalObject = jsonArray.getJSONObject(i);
                             int id = hospitalObject.getInt("id");
                             String name = hospitalObject.getString("name");
@@ -126,6 +126,7 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             public void run() {
                                 mSwipeRefreshLayout.setRefreshing(false);
                                 if (hospitals.length == 0) {
+                                    mClinicAdapter.setHospitalList(null);
                                     showNoClinic();
                                 } else {
                                     mClinicAdapter.setHospitalList(hospitals);
@@ -143,6 +144,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
             }
         });
     }
+
+//    private void sortHospitalByTravelTime(Hospital[] hospitals)
 
     private void showErrorMessage() {
         mErrorMessageTextView.setVisibility(View.VISIBLE);

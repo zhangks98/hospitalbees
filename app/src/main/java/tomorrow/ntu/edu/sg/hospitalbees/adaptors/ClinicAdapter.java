@@ -15,14 +15,6 @@ import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
 public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicAdapterViewHolder> {
 
-//    String clinics[] = {"Ng Teng Fong Hospital", "NTU Fullerton Health"};
-//    String traveltime[];
-//    String queuelength[] = {"5", "2"};
-//    String currentlocation = "NTU Hall 9";
-//    public static String clinicdetails = "ClinicChoice";
-//    public static String queuetime = "QueueTime";
-//    public static String traveldetails = "TravelDetails";
-
     private Hospital[] mHospitalList;
 
     private final ClinicAdapterOnClickHandler mClickHandler;
