@@ -16,20 +16,33 @@
 
 package tomorrow.ntu.edu.sg.hospitalbees.utilities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.util.Log;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import tomorrow.ntu.edu.sg.hospitalbees.BuildConfig;
 import tomorrow.ntu.edu.sg.hospitalbees.HBApp;
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
 
     private static final String TAG = "MyFirebaseIIDService";
+    private static final String serverUrl = BuildConfig.SERVER_URL;
 
     @Inject
     OkHttpClient mHttpClient;
@@ -67,8 +80,28 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token) {
+    private void sendRegistrationToServer(final String token) {
         // TODO: Implement this method to send token to your app server.
+        SharedPreferences mUserPreference = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
+        String phoneNumber = mUserPreference.getString(getString(R.string.pref_user_phone_number_key), null);
+        if (phoneNumber != null) {
+            Uri updateToken = Uri.parse(serverUrl).buildUpon()
+                    .appendPath("api")
+                    .appendPath(phoneNumber)
+                    .appendPath(token)
+                    .build();
+            Request request = new Request.Builder().url(updateToken.toString()).put(null).build();
+            mHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.e(TAG, "Failed to update the Token in the database");
+                }
 
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    Log.v(TAG, "Token Updated " + token);
+                }
+            });
+        }
     }
 }

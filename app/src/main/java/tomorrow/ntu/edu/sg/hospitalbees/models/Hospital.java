@@ -168,7 +168,7 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
     }
 
     @Override
-    public int compareTo(@NonNul Hospital compareHospital) {
+    public int compareTo(@NonNull Hospital compareHospital) {
         int compareETA = ((Hospital) compareHospital).getTotalETA();
         return this.totalETA - compareETA;
     }
