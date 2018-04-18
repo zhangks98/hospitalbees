@@ -28,9 +28,13 @@ import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.ClinicAdapter;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
+<<<<<<< HEAD
 /**
  * The class for Choosing clinic.
  */
+=======
+
+>>>>>>> bb0e84ed1ba1b6612ccb5b2fc1b8de43d363692f
 public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.ClinicAdapterOnClickHandler {
 
 
@@ -50,6 +54,7 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_clinic);
         ((HBApp) getApplication()).getNetComponent().inject(this);
+
 
         mSwipeRefreshLayout = findViewById(R.id.swipe_refresh_hospitals);
         mClinicRecylerView = findViewById(R.id.clinic_recycler_view);
@@ -91,6 +96,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                 .build();
         Request request = new Request.Builder().url(queryUri.toString()).get().build();
 
+
+
         mHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -123,6 +130,8 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             hospitalPOJO.setQueueLength(queueLength);
                             hospitals[i] = hospitalPOJO;
                         }
+                        sortHospitalByTravelTime(hospitals);
+
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -145,6 +154,37 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                 }
             }
         });
+    }
+
+    private void sortHospitalByTravelTime(Hospital[] hospitals){
+        String currentlocation = "NTU HALL 9";
+        hospitals[0] = new Hospital(1001, "Ng Teng Fong Hospital", 1.335082, 103.745198 );
+        hospitals[1] = new Hospital(1002, "NTU Fullerton Health", 1.345690, 103.682677);
+        hospitals[2] = new Hospital(1003, "Jurong Polyclinic", 1.350060, 103.730598);
+        int no_of_hospital = 3;
+        String str_to[] = new String[no_of_hospital];
+        String all_hosp_latlng = "";
+        for (int i = 0; i< no_of_hospital; i++) {
+            str_to[i] = Double.toString(hospitals[i].getLat()) + "," + Double.toString(hospitals[i].getLng());
+            all_hosp_latlng = all_hosp_latlng + str_to[i];
+            if (i == no_of_hospital-1) {
+                break;
+            }
+            else{
+                all_hosp_latlng = all_hosp_latlng + "|";
+            }
+        }
+        GeoTask geo = new GeoTask();
+        geo.sortHospitalsByETA(hospitals, currentlocation, all_hosp_latlng);
+        int traveltimearray[] = new int[hospitals.length];
+        for (int i = 0; i< hospitals.length; i++){
+            traveltimearray[i] = hospitals[i].getTravelTime();
+            Log.d("TRAVEL", "travel times:" + traveltimearray[i]);
+
+        }
+
+
+
     }
 
     private void showErrorMessage() {

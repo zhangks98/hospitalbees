@@ -100,7 +100,6 @@ public class Hospital implements Parcelable{
      * @return the id
      */
     public int getId() {
-
         return id;
     }
 
@@ -166,4 +165,5 @@ public class Hospital implements Parcelable{
     public void setTotalETA(int totalETA) {
         this.totalETA = totalETA;
     }
+
 }

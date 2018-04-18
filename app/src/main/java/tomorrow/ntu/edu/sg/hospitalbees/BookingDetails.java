@@ -163,11 +163,11 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
             mGoogleMap.setMyLocationEnabled(true);
         }
 
-        goToLocation(myLat, myLong, 12);
+        goToLocation(myLat, myLong);
 
     }
 
-    private void goToLocation(double myLat, double myLng, float zoom) {
+    private void goToLocation(double myLat, double myLng) {
         double hospitalLat = mChosenHospital.getLat();
         double hospitalLng = mChosenHospital.getLng();
         LatLng me = new LatLng(myLat,myLng);
