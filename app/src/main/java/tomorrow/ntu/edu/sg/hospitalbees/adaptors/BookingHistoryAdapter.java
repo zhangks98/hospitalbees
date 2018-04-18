@@ -14,7 +14,10 @@ import tomorrow.ntu.edu.sg.hospitalbees.R;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Booking;
 
 
-public class BookingHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+/**
+ * The Class for booking history adapter.
+ */
+public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAdapter.BookingHistoryViewHolder> {
 
     private Booking[] mBookingHistoryList;
 
@@ -23,20 +26,26 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     }
 
+    public void setBookingHistoryList(Booking[] bookings) {
+        this.mBookingHistoryList = bookings;
+        notifyDataSetChanged();
+    }
+
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BookingHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View row = inflater.inflate(R.layout.booking_history_list_item, parent, false);
         return new BookingHistoryViewHolder(row);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookingHistoryViewHolder holder, int position) {
         Booking historyItem = mBookingHistoryList[position];
-        ((BookingHistoryViewHolder) holder).mHospitalNameTextView.setText(historyItem.getHospitalName());
-        ((BookingHistoryViewHolder) holder).mBookingStatusTextView.setText(historyItem.getStatus());
+        holder.mHospitalNameTextView.setText(historyItem.getHospitalName());
+        holder.mBookingStatusTextView.setText(historyItem.getStatus());
         DateFormat formatter = SimpleDateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM);
-        ((BookingHistoryViewHolder) holder).mBookingDateTextView.setText(formatter.format(historyItem.getBookingTime()));
+        holder.mBookingDateTextView.setText(formatter.format(historyItem.getBookingTime()));
     }
 
 

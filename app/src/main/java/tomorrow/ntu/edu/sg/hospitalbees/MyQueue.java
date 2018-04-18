@@ -184,9 +184,9 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
                                         queueStatus.equals(getString(R.string.pref_booking_status_reactivated_value))){
                                     if (!obj.isNull("lengthBefore")) {
                                         final int lengthBefore = obj.getInt("lengthBefore");
-                                        bookingPrefEditor.putInt(getString(R.string.pref_booking_length_before_key), lengthBefore).commit();
+                                        bookingPrefEditor.putInt(getString(R.string.pref_booking_length_before_key), lengthBefore).apply();
                                     } else {
-                                        bookingPrefEditor.putInt(getString(R.string.pref_booking_length_before_key), -2).commit();
+                                        bookingPrefEditor.putInt(getString(R.string.pref_booking_length_before_key), -2).apply();
                                     }
                                     bookingPrefEditor.putString(getString(R.string.pref_booking_status_key), queueStatus).apply();
                                 } else if (queueStatus.equals(getString(R.string.pref_booking_status_missed_value))) {
@@ -307,7 +307,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
             lengthBeforeValueText.setText(getString(R.string.queue_length_before_approaching_text));
             lengthBeforeLabelText.setVisibility(View.INVISIBLE);
         } else {
-            lengthBeforeValueText.setText(getString(R.string.queue_length_before_unavailable_text));
+            lengthBeforeValueText.setText(getString(R.string.unavailable_text));
             lengthBeforeLabelText.setVisibility(View.VISIBLE);
         }
     }
@@ -356,7 +356,7 @@ public class MyQueue extends AppCompatActivity implements SharedPreferences.OnSh
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.pref_booking_status_key))) {
             updateQueueActivity();
-        } else if (key.equals(R.string.pref_booking_length_before_key)) {
+        } else if (key.equals(getString(R.string.pref_booking_length_before_key))) {
             setLengthBefore();
         }
     }

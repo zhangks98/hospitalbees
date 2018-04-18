@@ -61,8 +61,6 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     private static final String serverUrl = BuildConfig.SERVER_URL;
     GoogleMap mGoogleMap;
 
-    LocationManager lm;
-
     private SharedPreferences mUserPreferences, mBookingPreferences;
     private Hospital mChosenHospital;
 
@@ -71,7 +69,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
     private TextView mUserPhoneNumberTextView, mHospitalNameTextView, mBookingTimeTextView, mETATextView, mBookingMessageTextView;
 
     private String mUserPhoneNumber;
-    private double myLat, myLong;
+    private double myLat, myLng;
 
 
     @Inject
@@ -113,39 +111,16 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
 
             DateFormat formatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
             mBookingTimeTextView.setText(formatter.format(new Date()));
-            
-            lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            getLocation();
+
+            myLat = chooseClinicIntent.getDoubleExtra(getString(R.string.intent_extra_my_lat_key), mChosenHospital.getLat());
+            myLng = chooseClinicIntent.getDoubleExtra(getString(R.string.intent_extra_my_lng_key), mChosenHospital.getLng());
+
             initMap();
         } else {
             showErrorMessage();
         }
 
     }
-
-    private void getLocation(){
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-        }
-        else{
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (location != null) {
-                myLat = location.getLatitude();
-                myLong = location.getLongitude();
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_LOCATION:
-                getLocation();
-                break;
-        }
-    }
-
 
     private void initMap() {
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapFrag);
@@ -163,7 +138,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
             mGoogleMap.setMyLocationEnabled(true);
         }
 
-        goToLocation(myLat, myLong);
+        goToLocation(myLat, myLng);
 
     }
 
@@ -177,8 +152,6 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
         mGoogleMap.addMarker(new MarkerOptions().position(hospital).title(mChosenHospital.getName()));
         CameraUpdate update = CameraUpdateFactory.newLatLngBounds(bounds,150);
         mGoogleMap.animateCamera(update);
-
-
     }
 
     private void submitBooking() {
@@ -189,7 +162,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
         RequestBody requestBody = new FormBody.Builder()
                 .add("phoneNumber", mUserPhoneNumber)
                 .add("hospitalID",String.valueOf(mChosenHospital.getId()))
-                .add("eta", String.valueOf(mChosenHospital.getTotalETA()))
+                .add("eta", String.valueOf(mChosenHospital.getTravelTime()))
                 .build();
         Request request = new Request.Builder().url(submitUri.toString())
                 .post(requestBody).build();
