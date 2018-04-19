@@ -165,6 +165,7 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
         Uri queryUri = Uri.parse(mapsApiUrl).buildUpon()
                 .appendQueryParameter("origins", origins)
                 .appendQueryParameter("destinations", destinations)
+                .appendQueryParameter("mode","transit")
                 .appendQueryParameter("key", "AIzaSyBzkZbcWIZvz1s6MX2rl_uMoqYXfQoFOkg")
                 .build();
         Log.d(TAG,queryUri.toString());
