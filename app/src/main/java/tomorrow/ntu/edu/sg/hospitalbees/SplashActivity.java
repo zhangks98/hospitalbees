@@ -19,16 +19,11 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final int REQUEST_LOCATION = 1;
     LocationManager lm;
-    private double myLat, myLng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        getLocation();
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
 
         SharedPreferences user = getSharedPreferences(getString(R.string.pref_user), Context.MODE_PRIVATE);
         if (user.getBoolean(getString(R.string.pref_user_is_logged_in_key), getResources().getBoolean(R.bool.pref_is_logged_in_default))) {
@@ -37,21 +32,15 @@ public class SplashActivity extends AppCompatActivity {
         else {
             startActivity(new Intent(this, LoginActivity.class));
         }
+        getLocationPermission();
         this.finish();
     }
-    private void getLocation(){
+    private void getLocationPermission(){
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
-        else{
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (location != null) {
-                myLat = location.getLatitude();
-                myLng = location.getLongitude();
-            }
-        }
     }
-
+/*
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -60,5 +49,5 @@ public class SplashActivity extends AppCompatActivity {
                 getLocation();
                 break;
         }
-    }
+    }*/
 }

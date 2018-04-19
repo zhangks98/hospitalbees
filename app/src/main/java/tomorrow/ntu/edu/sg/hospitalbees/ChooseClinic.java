@@ -18,6 +18,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,12 +54,14 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
     private ClinicAdapter mClinicAdapter;
     private TextView mErrorMessageTextView, mNoClinicTextView;
 
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LocationRequest mLocationRequest;
+
     private static final String serverUrl = BuildConfig.SERVER_URL;
     private static final String mapsApiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
     private static final String TAG = "ChooseClinic";
 
     private static final int REQUEST_LOCATION = 1;
-    LocationManager lm;
     private double myLat, myLng;
 
     @Inject
@@ -80,17 +87,36 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getOpenedHospitals();
+                getLocation();
             }
         });
         mSwipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_dark,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        getLocation();
-        getOpenedHospitals();
 
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        getLocation();
+        mLocationRequest = new LocationRequest();
+        mLocationRequest.setNumUpdates(1);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, null);
     }
 
     @Override
@@ -110,7 +136,6 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                 .appendPath("hospital")
                 .build();
         Request request = new Request.Builder().url(queryUri.toString()).get().build();
-
 
 
         mHttpClient.newCall(request).enqueue(new Callback() {
@@ -154,21 +179,21 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                         mSwipeRefreshLayout.setRefreshing(false);
                         showErrorMessage();
                         Log.e(TAG, "failed to parse json response for opened hospitals");
-                        Log.e(TAG,e.getMessage());
+                        Log.e(TAG, e.getMessage());
                     }
                 }
             }
         });
     }
 
-    protected void fetchHospitalTravelTime (final Hospital[] hospitals, String origins, String destinations) {
+    protected void fetchHospitalTravelTime(final Hospital[] hospitals, String origins, String destinations) {
         Uri queryUri = Uri.parse(mapsApiUrl).buildUpon()
                 .appendQueryParameter("origins", origins)
                 .appendQueryParameter("destinations", destinations)
-                .appendQueryParameter("mode","transit")
+                .appendQueryParameter("mode", "transit")
                 .appendQueryParameter("key", "AIzaSyBzkZbcWIZvz1s6MX2rl_uMoqYXfQoFOkg")
                 .build();
-        Log.d(TAG,queryUri.toString());
+        Log.d(TAG, queryUri.toString());
         Request request = new Request.Builder().get().url(queryUri.toString()).build();
 
         mHttpClient.newCall(request).enqueue(new Callback() {
@@ -194,14 +219,14 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             Log.d("JSON", "object_elements:" + object_elements);
                             JSONObject object_duration = object_elements.getJSONObject("duration");
                             Log.d("JSON", "object_duration:" + object_duration);
-                            hospitals[i].setTravelTime(object_duration.getInt("value")/60);
+                            hospitals[i].setTravelTime(object_duration.getInt("value") / 60);
                         }
                         Arrays.sort(hospitals);
 
                     } catch (JSONException e) {
-                        Log.e(TAG,"Error parsing Maps API Travel Time json");
-                        Log.e(TAG,e.getMessage());
-                        for (Hospital hospital: hospitals) {
+                        Log.e(TAG, "Error parsing Maps API Travel Time json");
+                        Log.e(TAG, e.getMessage());
+                        for (Hospital hospital : hospitals) {
                             hospital.setTravelTime(-1);
                         }
 
@@ -225,19 +250,16 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
         });
     }
 
-    private void sortHospitalByTravelTime(Hospital[] hospitals){
-        lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
+    private void sortHospitalByTravelTime(Hospital[] hospitals) {
         String currentlocation = Double.toString(myLat) + "," + Double.toString(myLng);
         String str_to[] = new String[hospitals.length];
         String all_hosp_latlng = "";
-        for (int i = 0; i< hospitals.length; i++) {
+        for (int i = 0; i < hospitals.length; i++) {
             str_to[i] = Double.toString(hospitals[i].getLat()) + "," + Double.toString(hospitals[i].getLng());
             all_hosp_latlng = all_hosp_latlng + str_to[i];
-            if (i == hospitals.length-1) {
+            if (i == hospitals.length - 1) {
                 break;
-            }
-            else{
+            } else {
                 all_hosp_latlng = all_hosp_latlng + "|";
             }
         }
@@ -245,17 +267,20 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
 
     }
 
-    private void getLocation(){
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+    private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
-        else{
-            Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (location != null) {
-                myLat = location.getLatitude();
-                myLng = location.getLongitude();
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    myLat = location.getLatitude();
+                    myLng = location.getLongitude();
+                }
+                getOpenedHospitals();
             }
-        }
+        });
     }
 
     @Override

@@ -12,7 +12,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", '"http://10.27.41.54:3000/"'
+            buildConfigField "String", "SERVER_URL", '"http://10.27.175.203:3000/"'
 //            buildConfigField "String", "SERVER_URL", '"http://10.0.2.2:3000"'
 
         }
@@ -34,6 +34,7 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.google.android.gms:play-services-location:15.0.0'
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'

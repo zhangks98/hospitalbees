@@ -47,7 +47,7 @@ public class HomePage extends AppCompatActivity {
         FirebaseMessaging.getInstance().subscribeToTopic("news");
 
         homePageWording = (TextView) findViewById(R.id.homepageWordings);
-        Log.d("FCM",FirebaseInstanceId.getInstance().getToken());
+//        Log.d("FCM",FirebaseInstanceId.getInstance().getToken());
     }
 
 

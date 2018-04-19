@@ -109,7 +109,7 @@ public class BookingDetails extends AppCompatActivity implements OnMapReadyCallb
             mHospitalNameTextView.setText(mChosenHospital.getName());
             mETATextView.setText(getString(R.string.eta_value, mChosenHospital.getTotalETA()));
 
-            DateFormat formatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+            DateFormat formatter = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
             mBookingTimeTextView.setText(formatter.format(new Date()));
 
             myLat = chooseClinicIntent.getDoubleExtra(getString(R.string.intent_extra_my_lat_key), mChosenHospital.getLat());
