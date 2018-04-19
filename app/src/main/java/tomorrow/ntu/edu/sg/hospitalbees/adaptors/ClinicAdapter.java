@@ -87,7 +87,7 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicAdap
         if (thisHospital.getTravelTime() >= 0) {
             holder.mClinicTravelTimeTextView.setText(context.getString(R.string.eta_value, thisHospital.getTravelTime()));
         } else {
-            holder.mClinicQueueLengthTextView.setText(context.getString(R.string.unavailable_text));
+            holder.mClinicTravelTimeTextView.setText(context.getString(R.string.unavailable_text));
         }
         holder.mClinicTotalETATextView.setText(context.getString(R.string.eta_value, thisHospital.getTotalETA()));
 
