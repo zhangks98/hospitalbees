@@ -194,10 +194,6 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             hospitals[i].setTravelTime(object_duration.getInt("value")/60);
                         }
                         Arrays.sort(hospitals);
-                        for (int j=0; j<hospitals.length;j++) {
-                            Log.d("ARRAYRESULTS", "arrayRESULT:" + hospitals[j].getTotalETA());
-                        }
-
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
