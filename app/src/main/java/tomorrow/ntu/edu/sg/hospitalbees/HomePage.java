@@ -7,9 +7,13 @@ import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
@@ -25,7 +29,7 @@ import okhttp3.ResponseBody;
 /**
  * The class for showing the home page.
  */
-public class HomePage extends AppCompatActivity implements View.OnClickListener {
+public class HomePage extends AppCompatActivity {
 
     private TextView homePageWording;
     private CardView homePageCard;
@@ -43,15 +47,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
         FirebaseMessaging.getInstance().subscribeToTopic("news");
 
         homePageWording = (TextView) findViewById(R.id.homepageWordings);
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId()== R.id.homepage_card_view){
-            homePageWording.setVisibility(View.VISIBLE);
-            homePageCard.setVisibility(View.GONE);
-
-        }
+        Log.d("FCM",FirebaseInstanceId.getInstance().getToken());
     }
 
 
@@ -103,16 +99,30 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener 
     }
 
     /**
-     * Method that allows User to log out by clicking log out queue button.
+     * Method that allows User to log out by clicking log out menu option.
      *
-     * @param view the louout button view
      */
-    public void logOutButton(View view) {
+    private void logOut () {
         SharedPreferences.Editor editor = mUserPreferences.edit();
         editor.putBoolean(getString(R.string.pref_user_is_logged_in_key), false).apply();
         mBookingPreferences.edit().clear().apply();
         startActivity(new Intent(this, LoginActivity.class));
         this.finish();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_logout) {
+            logOut();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

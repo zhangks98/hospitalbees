@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+
 public class Hospital implements Parcelable, Comparable<Hospital>{
     private final int id;
     private final String name;
@@ -14,6 +15,7 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
     private int totalETA;
     private static final int AVG_Q_WAITING_TIME = 10;
 
+
     /**
      * Instantiates a new Hospital.
      *
@@ -23,6 +25,7 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
      * @param lng  the lng
      */
 
+
     public Hospital(int id, String name, double lat, double lng) {
         this.id = id;
         this.name = name;
@@ -30,11 +33,7 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
         this.lng = lng;
     }
 
-    /**
-     * Instantiates a new Hospital.
-     *
-     * @param in the in
-     */
+
     protected Hospital(Parcel in) {
         id = in.readInt();
         name = in.readString();
@@ -45,9 +44,7 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
         totalETA = in.readInt();
     }
 
-    /**
-     * The constant CREATOR.
-     */
+
     public static final Creator<Hospital> CREATOR = new Creator<Hospital>() {
         @Override
         public Hospital createFromParcel(Parcel in) {
@@ -76,93 +73,52 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
         dest.writeInt(totalETA);
     }
 
-    /**
-     * Gets lat.
-     *
-     * @return the lat
-     */
+
     public double getLat() {
         return lat;
     }
 
-    /**
-     * Gets lng.
-     *
-     * @return the lng
-     */
+
     public double getLng() {
         return lng;
     }
 
-    /**
-     * Gets id.
-     *
-     * @return the id
-     */
     public int getId() {
         return id;
     }
 
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
+
     public String getName() {
         return name;
     }
 
-    /**
-     * Gets queue length.
-     *
-     * @return the queue length
-     */
+
     public int getQueueLength() {
         return queueLength;
     }
 
-    /**
-     * Sets queue length.
-     *
-     * @param queueLength the queue length
-     */
+
     public void setQueueLength(int queueLength) {
         this.queueLength = queueLength;
     }
 
-    /**
-     * Gets travel time.
-     *
-     * @return the travel time
-     */
+
     public int getTravelTime() {
         return travelTime;
     }
 
-    /**
-     * Sets travel time.
-     *
-     * @param travelTime the travel time
-     */
+
     public void setTravelTime(int travelTime) {
         this.travelTime = travelTime;
         this.totalETA = Math.max(this.travelTime, this.queueLength * AVG_Q_WAITING_TIME);
     }
 
-    /**
-     * Gets total eta.
-     *
-     * @return the total eta
-     */
+
     public int getTotalETA() {
         return totalETA;
     }
 
-    /**
-     * Sets total eta.
-     *
-     * @param totalETA the total eta
-     */
+
     public void setTotalETA(int totalETA) {
         this.totalETA = totalETA;
     }
@@ -173,3 +129,4 @@ public class Hospital implements Parcelable, Comparable<Hospital>{
         return this.totalETA - compareETA;
     }
 }
+

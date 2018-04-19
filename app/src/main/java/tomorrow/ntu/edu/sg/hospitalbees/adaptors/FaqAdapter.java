@@ -12,34 +12,20 @@ import android.widget.TextView;
 import tomorrow.ntu.edu.sg.hospitalbees.R;
 
 
-/**
- * The type Faq adapter.
- */
+
 public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    /**
-     * The Context.
-     */
+
     Context context;
-    /**
-     * The Author.
-     */
+
     int[] author = {R.drawable.userimage, R.drawable.userimage, R.drawable.userimage, R.drawable.userimage, R.drawable.userimage};
-    /**
-     * The Author name.
-     */
+
     String[] author_name = {"Dr. Kaishuo Zhang", "Dr. Fuhank", "Dr. Vansh", "Dr. Chris", "Dr. Gerald"};
-    /**
-     * The Answered date.
-     */
+
     String[] answered_date = {"Answered Jan 20, 2018", "Answered Jan 14, 2018", "Answered Jan 06, 2018", "Answered Jan 03, 2018", "Answered Jan 02, 2018"};
-    /**
-     * The Number of views.
-     */
+
     String[] number_of_views = {"312 views", "125 views", "23 views", "11 views", "9 views"};
-    /**
-     * The Faq content.
-     */
+
     String[] faq_content = {
             "The most suitable syrup is Honey. If a cough persists for longer than 2 weeks, it is recommended to visit a doctor.",
             "Do not drink cold drinks and take proper care. Cough syrups might have a side effect. Complete any antibiotic course you start.",
@@ -49,11 +35,7 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     };
 
-    /**
-     * Instantiates a new Faq adapter.
-     *
-     * @param context the context
-     */
+
     public FaqAdapter(Context context){
         this.context = context;
     }
@@ -82,37 +64,21 @@ public class FaqAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return author_name.length;
     }
 
-    /**
-     * The type Item.
-     */
+
     public class Item extends RecyclerView.ViewHolder {
 
-        /**
-         * The Faqauthor.
-         */
+
         ImageView faqauthor;
-        /**
-         * The Faqauthorname.
-         */
+
         TextView faqauthorname;
-        /**
-         * The Faqanswereddate.
-         */
+
         TextView faqanswereddate;
-        /**
-         * The Faqnumberofviews.
-         */
+
         TextView faqnumberofviews;
-        /**
-         * The Faqcontent.
-         */
+
         TextView faqcontent;
 
-        /**
-         * Instantiates a new Item.
-         *
-         * @param itemView the item view
-         */
+
         public Item(View itemView) {
             super(itemView);
             faqauthor = (ImageView) itemView.findViewById(R.id.user_image);

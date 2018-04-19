@@ -35,9 +35,11 @@ import okhttp3.Response;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.ClinicAdapter;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
+
 /**
  * The Activity class for Choosing clinic.
  */
+
 
 public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.ClinicAdapterOnClickHandler {
 
@@ -163,6 +165,7 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
         Uri queryUri = Uri.parse(mapsApiUrl).buildUpon()
                 .appendQueryParameter("origins", origins)
                 .appendQueryParameter("destinations", destinations)
+                .appendQueryParameter("mode","transit")
                 .appendQueryParameter("key", "AIzaSyBzkZbcWIZvz1s6MX2rl_uMoqYXfQoFOkg")
                 .build();
         Log.d(TAG,queryUri.toString());
@@ -194,6 +197,15 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                             hospitals[i].setTravelTime(object_duration.getInt("value")/60);
                         }
                         Arrays.sort(hospitals);
+
+                    } catch (JSONException e) {
+                        Log.e(TAG,"Error parsing Maps API Travel Time json");
+                        Log.e(TAG,e.getMessage());
+                        for (Hospital hospital: hospitals) {
+                            hospital.setTravelTime(-1);
+                        }
+
+                    } finally {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -207,12 +219,6 @@ public class ChooseClinic extends AppCompatActivity implements ClinicAdapter.Cli
                                 }
                             }
                         });
-                    } catch (JSONException e) {
-                        Log.e(TAG,"Error parsing Maps API Travel Time json");
-                        Log.e(TAG,e.getMessage());
-                        for (Hospital hospital: hospitals) {
-                            hospital.setTravelTime(-1);
-                        }
                     }
                 }
             }

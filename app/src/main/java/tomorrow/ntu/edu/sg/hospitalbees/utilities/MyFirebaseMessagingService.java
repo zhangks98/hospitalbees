@@ -28,6 +28,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 //import com.firebase.jobdispatcher.Constraint;
@@ -66,11 +67,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         ((HBApp) getApplication()).getNetComponent().inject(this);
     }
 
-    /**
-     * Called when message is received.
-     *
-     * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
-     */
+
     // [START receive_message]
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -94,9 +91,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             try {
                 JSONObject data = new JSONObject(remoteMessage.getData());
-                String jsonMessage = data.getString("extra_information");
-                Log.d(TAG, "onMessageReceived: \n" +
-                        "Extra Information: " + jsonMessage);
+                if (data.has("action")) {
+                    String action = data.getString("action");
+                    Log.d(TAG, "onMessageReceived: \n" +
+                            "Extra Information: " + action);
+                    Intent intent = new Intent();
+                    intent.setAction(action);
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -105,16 +107,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
-        String title = remoteMessage.getNotification().getTitle(); //get title
-        String message = remoteMessage.getNotification().getBody(); //get message
-        String click_action = remoteMessage.getNotification().getClickAction(); //get click_action
+            String title = remoteMessage.getNotification().getTitle(); //get title
+            String message = remoteMessage.getNotification().getBody();
+            //get message
 
-        Log.d(TAG, "Message Notification Title: " + title);
-        Log.d(TAG, "Message Notification Body: " + message);
-        Log.d(TAG, "Message Notification click_action: " + click_action);
+            Log.d(TAG, "Message Notification Title: " + title);
+            Log.d(TAG, "Message Notification Body: " + message);
 
-        sendNotification(title, message, click_action);
-    }
+            sendNotification(title, message);
+        }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
         // message, here is where that should be initiated. See sendNotification method below.
@@ -124,9 +125,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     // [END receive_message]
 
-    /**
-     * Schedule a job using FirebaseJobDispatcher.
-     */
 //    private void scheduleJob() {
 //        // [START dispatch_job]
 //        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
@@ -138,9 +136,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //        // [END dispatch_job]
 //    }
 
-    /**
-     * Handle time allotted to BroadcastReceivers.
-     */
+
     private void handleNow() {
         Log.d(TAG, "Short lived task is done.");
     }
@@ -150,16 +146,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      *
      * @param messageBody FCM message body received.
      */
-    private void sendNotification(String title, String messageBody, String click_action) {
-        Intent intent;
-        Log.d(TAG, click_action);
-        if(click_action.equals("MYQUEUE")){
-            intent = new Intent(this, MyQueue.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }else{
-            intent = new Intent(this, SplashActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
+    private void sendNotification(String title, String messageBody) {
+        Intent intent = new Intent(this,SplashActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
