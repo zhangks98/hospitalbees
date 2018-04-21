@@ -100,9 +100,10 @@ public class HomePage extends AppCompatActivity {
 
     /**
      * Method that allows User to log out by clicking log out menu option.
-     *
      */
-    private void logOut () {
+    public void viewMap(View view) { startActivity(new Intent(this, MyMap.class)); }
+
+    private void logOut() {
         SharedPreferences.Editor editor = mUserPreferences.edit();
         editor.putBoolean(getString(R.string.pref_user_is_logged_in_key), false).apply();
         mBookingPreferences.edit().clear().apply();
@@ -126,3 +127,5 @@ public class HomePage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
+

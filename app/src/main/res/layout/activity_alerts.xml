@@ -1,65 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="tomorrow.ntu.edu.sg.hospitalbees.Alerts">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="tomorrow.ntu.edu.sg.hospitalbees.Alerts">
 
 
-    <TextView
-        android:id="@+id/alertTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:text="@string/view_alerts"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/diseaseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="HFMD"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/numOfCases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:text="325 cases"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:id="@+id/diseaseName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:text="Dengue Fever"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/numOfCases1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:text="15 cases"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:id="@+id/diseaseName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Salmonellosis (non-enteric fever)"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/numOfCases2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:text="6 cases"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:id="@+id/diseaseName3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Mumps"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/numOfCases3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:text="7 cases"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:id="@+id/diseaseName4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:text="Measles"
+            android:textAlignment="center"
+            android:textSize="24sp"/>
+        <TextView
+            android:id="@+id/numOfCases4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="10dp"
+            android:text="6 cases"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
-    <TextView
-        android:id="@+id/alertContent"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/alert_content"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertTitle" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
-    <Button
-        android:id="@+id/thanksButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/thanks_button"
-        app:layout_constraintEnd_toStartOf="@+id/knowMoreButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertContent"
-        android:onClick="thanksButton" />
+        <Button
+            android:id="@+id/thanksButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:onClick="thanksButton"
+            android:text="@string/thanks_button" />
 
-    <Button
-        android:id="@+id/knowMoreButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/know_more"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertContent" />
+        <Button
+            android:id="@+id/knowMoreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="knowMore"
+            android:text="Know More"
+            />
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>

@@ -31,7 +31,6 @@
     <string name="no_open_clinic">No Open Hospitals\nplease try later&#8230;</string>
 
 
-
     <string name="booking_completed">Booking Completed</string>
     <string name="completion_notice">Please go to My Queue and present the QR code to the clinic to check in. Your Q Number will be allocated for you.</string>
     <string name="back_text">Back</string>
@@ -137,9 +136,7 @@
     <string name="intent_extra_chosen_hospital_key" translatable="false">chosenBookingHospital</string>
     <string name="intent_extra_my_lat_key" translatable="false">myLat</string>
     <string name="intent_extra_my_lng_key" translatable="false">myLng</string>
-
-
-
+    <string name="intent_extra_alerts_response_key" translatable="false">alertsResponse</string>
 
 
 </resources>

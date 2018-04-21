@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:card_view="http://schemas.android.com/apk/res-auto"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      xmlns:app="http://schemas.android.com/tools"
+      android:id="@+id/clinic_card_view"
+      android:layout_marginTop="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_marginRight="16dp"
+      card_view:cardElevation="3dp"
+      card_view:contentPadding="16dp"
+      android:foreground="?selectableItemBackground"
+      android:clickable="true"
+      android:focusable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/alert_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Changes in rankings over the last week"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/alert_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_title"
+            android:text="HFMD stayed at position 1 and observed a decrease of 87 cases from last week"
+            android:textSize="20sp"
+            app:layout_marginTop="100dp" />
+
+        <TextView
+            android:id="@+id/alert_content1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_content"
+            android:text="Dengue Fever stayedd at position 2 and observed an increase of 15 cases from last week"
+            android:textSize="20sp"
+            app:layout_marginTop="180dp" />
+
+        <TextView
+            android:id="@+id/alert_content2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_content1"
+            android:text="Salmonellosis (non-enteric fever) stayed at position 3 and observed an increase of 6 cases from last week"
+            android:textSize="20sp"
+            app:layout_marginTop="260dp" />
+
+        <TextView
+            android:id="@+id/alert_content3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_content2"
+            android:text="Mumps moved up by 1 position, coming to 4 and observed a decrease of 4 cases from last week"
+            android:textSize="20sp"
+            app:layout_marginTop="360dp" />
+
+        <TextView
+            android:id="@+id/alert_content4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/alert_content3"
+            android:text="Measles is a new entry into the list at position 5 with 6 casese this week"
+            android:textSize="20sp"
+            app:layout_marginTop="440dp" />
+
+    </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
