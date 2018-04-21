@@ -10,8 +10,7 @@ Hospitalbees addresses the issue of having to travel all the way to the clinic a
 Details on why and how this works can be found [here](https://github.com/zhangks98/hospitalbees-qdemo/wiki/Why-HospitalBees-works).
 
 ## Video Demo
-stub
-
+[![Video Demo for HospitalBees](https://imgur.com/SwwnGoq)](https://www.youtube.com/watch?v=n9psR2TgTWo)
 
 ## Key features
 
@@ -20,7 +19,7 @@ stub
   * The ordering of available clinics are sorted based on total estimated waiting time
 * View My Queue
   * The all-in-one place to view your current booking
-  * Check-in / Reactivate a missed queue number with a simple scan of QR code
+  * Check-in / Reactivate a missed queue at the clinic number with a simple scan of QR code
   * Get the number of patients in front of you in queue
   * Be notified timely
 * View Booking History
@@ -28,6 +27,6 @@ stub
   * View prevalent disease in Singapore
 
 * What if people abuse the system with multiple bookings?
-  * The queue is “actually” inserted only if the user is physically present at the clinic
+  * The queue is “actually” inserted only if the user is **physically present** at the clinic
   * Each user can only have one active booking in each clinic
   * Late arrival will have penalties
