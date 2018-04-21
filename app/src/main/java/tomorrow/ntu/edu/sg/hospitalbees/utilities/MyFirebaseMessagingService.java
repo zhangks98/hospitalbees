@@ -22,8 +22,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -41,18 +39,12 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Random;
-
 import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
 import tomorrow.ntu.edu.sg.hospitalbees.HBApp;
-import tomorrow.ntu.edu.sg.hospitalbees.MyQueue;
 import tomorrow.ntu.edu.sg.hospitalbees.R;
-import tomorrow.ntu.edu.sg.hospitalbees.SplashActivity;
+import tomorrow.ntu.edu.sg.hospitalbees.ui.SplashActivity;
 
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {

@@ -1,4 +1,4 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +25,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import tomorrow.ntu.edu.sg.hospitalbees.BuildConfig;
+import tomorrow.ntu.edu.sg.hospitalbees.HBApp;
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.BookingHistoryAdapter;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Booking;
 

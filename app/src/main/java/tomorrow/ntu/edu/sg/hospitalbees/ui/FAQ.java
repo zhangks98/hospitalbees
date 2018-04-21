@@ -1,4 +1,4 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 import tomorrow.ntu.edu.sg.hospitalbees.adaptors.FaqAdapter;
 
 /**

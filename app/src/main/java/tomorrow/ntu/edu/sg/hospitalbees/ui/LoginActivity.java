@@ -1,4 +1,4 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 
 /**
  * The class for login activity

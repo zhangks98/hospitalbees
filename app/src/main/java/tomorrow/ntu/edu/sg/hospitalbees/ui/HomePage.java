@@ -1,30 +1,19 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 
 /**
  * The class for showing the home page.
@@ -101,8 +90,6 @@ public class HomePage extends AppCompatActivity {
     /**
      * Method that allows User to log out by clicking log out menu option.
      */
-    public void viewMap(View view) { startActivity(new Intent(this, MyMap.class)); }
-
     private void logOut() {
         SharedPreferences.Editor editor = mUserPreferences.edit();
         editor.putBoolean(getString(R.string.pref_user_is_logged_in_key), false).apply();

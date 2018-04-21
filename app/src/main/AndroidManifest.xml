@@ -39,7 +39,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,59 +47,61 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".HomePage" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.HomePage" />
         <activity
-            android:name=".Alerts"
+            android:name=".ui.Alerts"
             android:label="Alerts"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".ui.HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ui.HomePage" />
         </activity>
+        <activity android:name=".ui.AlertsDetail" />
+
         <activity
-            android:name=".FAQ"
+            android:name=".ui.FAQ"
             android:label="FAQ"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".ui.HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ui.HomePage" />
         </activity>
         <activity
-            android:name=".MyQueue"
+            android:name=".ui.MyQueue"
             android:label="My Queue"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".ui.HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ui.HomePage" />
         </activity>
         <activity
-            android:name=".ChooseClinic"
+            android:name=".ui.ChooseClinic"
             android:label="Choose Clinic"
             android:launchMode="singleTop"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".ui.HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ui.HomePage" />
         </activity>
         <activity
-            android:name=".BookingDetails"
+            android:name=".ui.BookingDetails"
             android:label="Your Booking Details" />
         <activity
-            android:name=".BookingComplete"
-            android:parentActivityName=".HomePage"
+            android:name=".ui.BookingComplete"
+            android:parentActivityName=".ui.HomePage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ui.HomePage" />
         </activity>
         <activity
-            android:name=".BookingHistory"
+            android:name=".ui.BookingHistory"
             android:label="Booking History"
-            android:parentActivityName=".HomePage">
+            android:parentActivityName=".ui.HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomePage" />
+                android:value=".ui.HomePage" />
         </activity>
 
         <!--
@@ -137,7 +139,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".AlertsDetail"></activity>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tomorrow.ntu.edu.sg.hospitalbees.BookingDetails">
+    tools:context="tomorrow.ntu.edu.sg.hospitalbees.ui.BookingDetails">
     <android.support.constraint.ConstraintLayout
         android:id="@+id/layout_booking_details"
         android:layout_width="match_parent"

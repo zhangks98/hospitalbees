@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="tomorrow.ntu.edu.sg.hospitalbees.HomePage">
+    tools:context="tomorrow.ntu.edu.sg.hospitalbees.ui.HomePage">
     <item
         android:id="@+id/action_logout"
         android:orderInCategory="100"

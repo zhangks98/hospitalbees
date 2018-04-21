@@ -1,15 +1,11 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.ui;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -48,6 +44,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import tomorrow.ntu.edu.sg.hospitalbees.BuildConfig;
+import tomorrow.ntu.edu.sg.hospitalbees.HBApp;
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 import tomorrow.ntu.edu.sg.hospitalbees.models.Hospital;
 
 

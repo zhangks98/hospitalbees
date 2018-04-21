@@ -1,8 +1,10 @@
-package tomorrow.ntu.edu.sg.hospitalbees;
+package tomorrow.ntu.edu.sg.hospitalbees.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import tomorrow.ntu.edu.sg.hospitalbees.R;
 
 public class AlertsDetail extends AppCompatActivity {
 

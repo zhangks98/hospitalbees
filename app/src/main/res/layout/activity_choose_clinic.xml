@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="tomorrow.ntu.edu.sg.hospitalbees.ChooseClinic">
+    tools:context="tomorrow.ntu.edu.sg.hospitalbees.ui.ChooseClinic">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_hospitals"
