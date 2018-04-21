@@ -85,7 +85,7 @@
     <string name="queue_length_before_text">Patients In Front of You</string>
     <string name="unavailable_text">Unavailable</string>
     <string name="queue_length_before_approaching_text">You\'ll be Notified shortly</string>
-    <string name="queue_length_before_notified_text">Q Number is Notified!</string>
+    <string name="queue_length_before_notified_text">Q Number is Notified!\nPlease proceed see the doctor</string>
     <string name="queue_reminder_text_active">Numbers may not be called in order</string>
     <string name="queue_reminder_text_reactivated">Numbers may not be called in order\nNote: Your Booking can be Reactivated only once</string>
 
