@@ -10,7 +10,7 @@ Hospitalbees addresses the issue of having to travel all the way to the clinic a
 Details on why and how this works can be found [here](https://github.com/zhangks98/hospitalbees-qdemo/wiki/Why-HospitalBees-works).
 
 ## Video Demo
-[![Video Demo for HospitalBees](https://imgur.com/SwwnGoq.png | width=250)](https://www.youtube.com/watch?v=n9psR2TgTWo)
+[<img src="https://imgur.com/SwwnGoq.png" width="200">](https://www.youtube.com/watch?v=n9psR2TgTWo)
 
 ## Key features
 
