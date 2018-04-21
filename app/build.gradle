@@ -12,9 +12,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "String", "SERVER_URL", '"http://10.27.175.203:3000/"'
-//            buildConfigField "String", "SERVER_URL", '"http://10.0.2.2:3000"'
-
+            buildConfigField "String", "SERVER_URL", '"http://10.0.2.2:3000"'
         }
         release {
             minifyEnabled false

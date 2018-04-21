@@ -49,13 +49,6 @@ public class Alerts extends AppCompatActivity {
         mNumOfCases = findViewById(R.id.numOfCases);
     }
 
-    /**
-     * method that returns to homepage by pressing the thanks button
-     *
-     * @param view the thanks button view
-     */
-    public void thanksButton(View view){startActivity(new Intent(this, HomePage.class));}
-
     public void knowMore(View view) {
         startActivity(new Intent(this, AlertsDetail.class));
 

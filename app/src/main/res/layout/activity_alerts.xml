@@ -141,15 +141,6 @@
             android:background="@android:color/darker_gray"/>
 
         <Button
-            android:id="@+id/thanksButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_gravity="center"
-            android:onClick="thanksButton"
-            android:text="@string/thanks_button" />
-
-        <Button
             android:id="@+id/knowMoreButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
